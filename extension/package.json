@@ -36,11 +36,11 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "@ajainarayanan/react-pan-zoom": "^0.0.4",
     "core-js": "^3.7.0",
     "jsonwebtoken": "^8.5.1",
     "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "react-dom": "^16.14.0",
+    "react-easy-panzoom": "^0.4.4"
   },
   "babel": {
     "presets": [

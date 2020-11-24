@@ -9,20 +9,35 @@ export default class CanvasComponent extends React.Component {
         this.updateCanvas();
     }
     updateCanvas() {
-        const ctx = this.canvas.current.getContext('2d');
-        for (let x = 0; x < 600; x++) {
-            for (let y = 0; y < 900; y++) {
-                ctx.fillStyle = random_rgba();
+        const ctx = this.canvas.current.getContext('2d', { antialias: false, });
+        for (let x = 0; x < 300; x++) {
+            for (let y = 0; y < 450; y++) {
+                ctx.fillStyle = 'red';
                 ctx.fillRect(x, y, 1, 1);
 
             }
         }
     }
+    onClick = (e) => {
+        const rect = this.canvas.current.getBoundingClientRect()
 
+        const x = Math.floor((e.clientX - rect.left) * this.canvas.current.width / rect.width)
+        const y = Math.floor((e.clientY - rect.top) * this.canvas.current.height / rect.height)
+        console.log("x: " + x + " y: " + y)
+
+        const ctx = this.canvas.current.getContext('2d', { antialias: true, depth: false });
+
+        ctx.fillStyle = random_rgba();
+        ctx.fillRect(x, y, 1, 1);
+    }
+
+    onDragEnd = (e) => {
+        e.preventDefault();
+    }
 
     render() {
         return (
-            <canvas ref={this.canvas} style={{ imageRendering: "pixelated" }} width={600} height={900} />
+            <canvas ref={this.canvas} onDragEnd={this.onDragEnd} onClick={this.onClick} style={{ imageRendering: "pixelated" }} width={300} height={450} />
         );
     }
 }
