@@ -1,22 +1,29 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export default class CanvasComponent extends React.Component {
     constructor(props) {
         super(props);
         this.canvas = React.createRef();
+        console.log(props);
     }
     componentDidMount() {
         this.updateCanvas();
     }
     updateCanvas() {
+
         const ctx = this.canvas.current.getContext('2d', { antialias: false, });
+        const fillStyles = ['yellow', 'orange', 'red', 'pink', 'purple', 'blue', 'cyan', 'lime', 'green', 'lime']
+        var styleSelect = 0;
         for (let x = 0; x < 300; x++) {
             for (let y = 0; y < 450; y++) {
-                ctx.fillStyle = 'red';
+                styleSelect++;
+                if (styleSelect == fillStyles.length) styleSelect = 0;
+                ctx.fillStyle = fillStyles[styleSelect];
                 ctx.fillRect(x, y, 1, 1);
-
             }
         }
+
     }
     onClick = (e) => {
         const rect = this.canvas.current.getBoundingClientRect()
@@ -29,10 +36,7 @@ export default class CanvasComponent extends React.Component {
 
         ctx.fillStyle = random_rgba();
         ctx.fillRect(x, y, 1, 1);
-    }
-
-    onDragEnd = (e) => {
-        e.preventDefault();
+        this.props.dispatch("a", "823922")
     }
 
     render() {
@@ -40,6 +44,10 @@ export default class CanvasComponent extends React.Component {
             <canvas ref={this.canvas} onDragEnd={this.onDragEnd} onClick={this.onClick} style={{ imageRendering: "pixelated" }} width={300} height={450} />
         );
     }
+}
+
+CanvasComponent.propTypes = {
+    dispatch: PropTypes.func.isRequired
 }
 
 function random_rgba() {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { PanZoom } from 'react-easy-panzoom'
-import CanvasComponent from './Canvas.js';
+import { CanvasContainer } from './containers/Canvas';
 
 export default class PanZoomContainer extends React.PureComponent {
     render() {
@@ -14,7 +14,7 @@ export default class PanZoomContainer extends React.PureComponent {
                 preventPan={false}
                 style={{ cursor: "auto" }}
             >
-                <CanvasComponent zoom={this.zoom} />
+                <CanvasContainer />
             </PanZoom>
         ];
     }
