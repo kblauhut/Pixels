@@ -15,7 +15,7 @@ export default class CanvasComponent extends React.Component {
 
         for (let x = 0; x < 300; x++) {
             for (let y = 0; y < 450; y++) {
-                ctx.fillStyle = 'white';
+                ctx.fillStyle = 'lightgrey';
                 ctx.fillRect(x, y, 1, 1);
             }
         }
