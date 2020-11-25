@@ -1,16 +1,32 @@
+import { ADD_PIXEL } from '../actionTypes'
+
 const initialState = {
-    allPixels: {},
+    pixelData: {},
+    pixelArray: []
 };
 
 const pixels = (state = initialState, action) => {
-    console.log(action);
-    return {
-        ...state,
-        allPixels: {
-            ...state.allPixels,
-            [action.id]: { color: action.color }
-        },
-    };
+    switch (action.type) {
+        case ADD_PIXEL:
+            const id = action.payload.x + "," + action.payload.y
+            return {
+                ...state,
+                pixelData: {
+                    ...state.pixelData,
+                    [id]: { color: action.payload.color }
+                },
+                pixelArray: [
+                    ...state.pixelArray,
+                    {
+                        x: action.payload.x,
+                        y: action.payload.y,
+                        color: action.payload.color
+                    }]
+            };
+        default:
+            return state;
+    }
+
 }
 
 export default pixels

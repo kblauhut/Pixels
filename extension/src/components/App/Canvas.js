@@ -5,21 +5,17 @@ export default class CanvasComponent extends React.Component {
     constructor(props) {
         super(props);
         this.canvas = React.createRef();
-        console.log(props);
     }
     componentDidMount() {
         this.updateCanvas();
     }
     updateCanvas() {
 
-        const ctx = this.canvas.current.getContext('2d', { antialias: false, });
-        const fillStyles = ['yellow', 'orange', 'red', 'pink', 'purple', 'blue', 'cyan', 'lime', 'green', 'lime']
-        var styleSelect = 0;
+        const ctx = this.canvas.current.getContext('2d');
+
         for (let x = 0; x < 300; x++) {
             for (let y = 0; y < 450; y++) {
-                styleSelect++;
-                if (styleSelect == fillStyles.length) styleSelect = 0;
-                ctx.fillStyle = fillStyles[styleSelect];
+                ctx.fillStyle = 'white';
                 ctx.fillRect(x, y, 1, 1);
             }
         }
@@ -30,13 +26,12 @@ export default class CanvasComponent extends React.Component {
 
         const x = Math.floor((e.clientX - rect.left) * this.canvas.current.width / rect.width)
         const y = Math.floor((e.clientY - rect.top) * this.canvas.current.height / rect.height)
-        console.log("x: " + x + " y: " + y)
 
-        const ctx = this.canvas.current.getContext('2d', { antialias: true, depth: false });
-
-        ctx.fillStyle = random_rgba();
+        const ctx = this.canvas.current.getContext('2d');
+        const color = random_rgba()
+        ctx.fillStyle = color;
         ctx.fillRect(x, y, 1, 1);
-        this.props.dispatch("a", "823922")
+        this.props.dispatch(x, y, color)
     }
 
     render() {
@@ -47,8 +42,15 @@ export default class CanvasComponent extends React.Component {
 }
 
 CanvasComponent.propTypes = {
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    pixels: PropTypes.arrayOf(PropTypes.shape({
+        x: PropTypes.number.isRequired,
+        y: PropTypes.number.isRequired,
+        color: PropTypes.string.isRequired
+    }).isRequired
+    ).isRequired
 }
+
 
 function random_rgba() {
     var o = Math.round, r = Math.random, s = 255;

@@ -3,9 +3,15 @@ import CanvasComponent from '../Canvas'
 import { setPixel } from '../../../redux/actions'
 
 const mapDispatchToProps = dispatch => ({
-    dispatch: (id, color) => {
-        dispatch(setPixel(id, color))
+    dispatch: (x, y, color) => {
+        dispatch(setPixel(x, y, color))
     }
 })
 
-export const CanvasContainer = connect(() => ({}), mapDispatchToProps)(CanvasComponent)
+function mapStateToProps(state, ownProps) {
+    const { pixels } = state
+    return { pixels: pixels.pixelArray }
+}
+
+
+export const CanvasContainer = connect(mapStateToProps, mapDispatchToProps)(CanvasComponent)

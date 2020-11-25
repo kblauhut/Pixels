@@ -1,0 +1,1 @@
+export const ADD_PIXEL = "ADD_PIXEL"
