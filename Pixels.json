@@ -1,7 +1,7 @@
 {
   "allowHttpBackend": false,
-  "backendCommand": "",
-  "backendFolderName": "extension",
+  "backendCommand": "node app.js",
+  "backendFolderName": "extension/server",
   "certificateExceptions": [
     {
       "isAllowed": true,

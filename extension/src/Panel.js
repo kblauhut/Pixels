@@ -1,9 +1,25 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import App from "./components/App/App"
-
 import { Provider } from 'react-redux'
-import store from './redux/store'
+import { createStore, applyMiddleware } from "redux"
+import createSagaMiddleware from 'redux-saga'
+
+import App from "./components/App/App"
+import rootReducer from "./redux/reducers"
+import setupSocket from './util/websocket'
+import handleNewPixel from './sagas'
+
+const sagaMiddleware = createSagaMiddleware()
+
+const store = createStore(
+  rootReducer,
+  applyMiddleware(sagaMiddleware)
+)
+
+const socket = setupSocket(store.dispatch)
+
+sagaMiddleware.run(handleNewPixel, { socket })
+
 
 ReactDOM.render(
   <Provider store={store}>
