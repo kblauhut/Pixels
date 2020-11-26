@@ -1,1 +1,2 @@
-export const ADD_PIXEL = "ADD_PIXEL"
+export const SET_PIXEL = "SET_PIXEL"
+export const RECIEVED_PIXEL = "RECIEVED_PIXEL"

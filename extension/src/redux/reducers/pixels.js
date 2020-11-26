@@ -1,4 +1,4 @@
-import { ADD_PIXEL } from '../actionTypes'
+import { RECIEVED_PIXEL, SET_PIXEL } from '../actionTypes'
 
 const initialState = {
     pixelData: {},
@@ -7,7 +7,8 @@ const initialState = {
 
 const pixels = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_PIXEL:
+        case SET_PIXEL:
+        case RECIEVED_PIXEL:
             const id = action.payload.x + "," + action.payload.y
             return {
                 ...state,

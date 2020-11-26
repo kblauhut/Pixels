@@ -1,5 +1,5 @@
 import * as types from '../../redux/actionTypes'
-import { setPixel } from '../../redux/actions'
+import { recievedPixel } from '../../redux/actions'
 
 const setupSocket = (dispatch) => {
     const socket = new WebSocket('ws://localhost:8989')
@@ -7,9 +7,8 @@ const setupSocket = (dispatch) => {
     socket.onmessage = (event) => {
         const data = JSON.parse(event.data)
         switch (data.type) {
-            case types.ADD_PIXEL:
-                console.log(data);
-                dispatch(setPixel(data.payload.x, data.payload.y, data.payload.color))
+            case types.SET_PIXEL:
+                dispatch(recievedPixel(data.message.x, data.message.y, data.message.color))
                 break
             default:
                 break

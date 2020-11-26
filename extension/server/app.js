@@ -14,10 +14,10 @@ wss.on('connection', (ws) => {
     ws.on('message', (message) => {
         const data = JSON.parse(message)
         switch (data.type) {
-            case 'ADD_PIXEL':
+            case 'SET_PIXEL':
                 broadcast({
-                    type: 'ADD_PIXEL',
-                    message: data,
+                    type: 'SET_PIXEL',
+                    message: data.payload,
                 }, ws)
                 break
             default:

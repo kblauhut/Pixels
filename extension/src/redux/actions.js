@@ -1,7 +1,16 @@
-import { ADD_PIXEL } from './actionTypes'
+import { SET_PIXEL, RECIEVED_PIXEL } from './actionTypes'
 
 export const setPixel = (x, y, color) => ({
-    type: ADD_PIXEL,
+    type: SET_PIXEL,
+    payload: {
+        x: x,
+        y: y,
+        color: color
+    }
+});
+
+export const recievedPixel = (x, y, color) => ({
+    type: RECIEVED_PIXEL,
     payload: {
         x: x,
         y: y,
