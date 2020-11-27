@@ -1,8 +1,7 @@
-import { RECIEVED_PIXEL, SET_PIXEL } from '../actionTypes'
+import { RECIEVED_PIXEL, SET_PIXEL, PIXEL_DOWNLOAD } from '../actionTypes'
 
 const initialState = {
-    pixelData: {},
-    pixelArray: []
+    pixelArray: [],
 };
 
 const pixels = (state = initialState, action) => {
@@ -12,10 +11,6 @@ const pixels = (state = initialState, action) => {
             const id = action.payload.x + "," + action.payload.y
             return {
                 ...state,
-                pixelData: {
-                    ...state.pixelData,
-                    [id]: { color: action.payload.color }
-                },
                 pixelArray: [
                     ...state.pixelArray,
                     {
@@ -23,6 +18,15 @@ const pixels = (state = initialState, action) => {
                         y: action.payload.y,
                         color: action.payload.color
                     }]
+            };
+        case PIXEL_DOWNLOAD:
+            let newPixelArray = [
+                ...state.pixelArray,
+            ]
+            newPixelArray.push(...action.payload.pixelArray)
+            return {
+                ...state,
+                pixelArray: newPixelArray
             };
         default:
             return state;

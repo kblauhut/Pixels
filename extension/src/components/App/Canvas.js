@@ -8,25 +8,20 @@ export default class CanvasComponent extends React.Component {
     }
     componentDidUpdate() {
         if (this.props.pixels.length != 0) {
-            let lastPixel = this.props.pixels.pop()
-            this.updatePixel(lastPixel.x, lastPixel.y, lastPixel.color)
+            this.props.pixels.forEach(element => {
+                this.updatePixel(element.x, element.y, element.color)
+            });
         }
     }
 
     componentDidMount() {
-        this.updateCanvas();
-    }
-    updateCanvas() {
-        const ctx = this.canvas.current.getContext('2d');
-
-        for (let x = 0; x < 300; x++) {
-            for (let y = 0; y < 450; y++) {
-                ctx.fillStyle = 'lightgrey';
-                ctx.fillRect(x, y, 1, 1);
-            }
+        if (this.props.pixels.length != 0) {
+            this.props.pixels.forEach(element => {
+                this.updatePixel(element.x, element.y, element.color)
+            });
         }
-
     }
+
     onClick = (e) => {
         const rect = this.canvas.current.getBoundingClientRect()
         const x = Math.floor((e.clientX - rect.left) * this.canvas.current.width / rect.width)
