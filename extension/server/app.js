@@ -1,14 +1,19 @@
-const { Statement } = require('sqlite3');
-const WebSocket = require('ws')
-const sqlite3 = require('sqlite3').verbose();
+const CANVAS_X = 300;
+const CANVAS_Y = 450;
 
-const db = new sqlite3.Database('db.sqlite');
+const fs = require('fs')
+const WebSocket = require('ws')
+const db = require('better-sqlite3')('db.sqlite');
 const wss = new WebSocket.Server({ port: 8989 })
 
-db.serialize(function () {
-    db.run("CREATE TABLE IF NOT EXISTS pixels (pixel_id TEXT PRIMARY KEY, x INTEGER, y INTEGER, color TEXT, placed_date TEXT)");
-    db.run("CREATE TABLE IF NOT EXISTS users (user_id TEXT PRIMARY KEY, pixels_remaining INTEGER)");
-});
+var canvas = new Uint8Array(CANVAS_X * CANVAS_Y);
+
+db.prepare("CREATE TABLE IF NOT EXISTS pixels (x INTEGER NOT NULL, y INTEGER NOT NULL, color INT, PRIMARY KEY(x,y))").run()
+db.prepare("CREATE TABLE IF NOT EXISTS users (user_id TEXT NOT NULL PRIMARY KEY, pixels_remaining INTEGER)").run()
+db.prepare("CREATE TABLE IF NOT EXISTS pixels_users (x INTEGER NOT NULL, y INTEGER NOT NULL, user_id TEXT NOT NULL, FOREIGN KEY (x,y) REFERENCES pixels(x,y), FOREIGN KEY (user_id) REFERENCES users(user_id))").run()
+
+
+loadCanvasFromDB()
 
 const broadcast = (data, ws) => {
     wss.clients.forEach((client) => {
@@ -23,7 +28,7 @@ wss.on('connection', (ws) => {
         const data = JSON.parse(message)
         switch (data.type) {
             case 'SET_PIXEL':
-                setPixel(data.payload.x + "x" + data.payload.y, data.payload.x, data.payload.y, data.payload.color)
+                setPixel(data.payload.x, data.payload.y, data.payload.color)
                 broadcast({
                     type: 'SET_PIXEL',
                     message: data.payload,
@@ -33,35 +38,48 @@ wss.on('connection', (ws) => {
                 break
         }
     })
-    sendAllPixels(ws)
 })
-async function sendAllPixels(ws) {
-    let message = await getAllPixels();
-    ws.send(
-        JSON.stringify({
-            type: 'PIXEL_DOWNLOAD',
-            message: message,
-        })
-    )
-}
 
-
-function getAllPixels() {
-    return new Promise((resolve, reject) => {
-        returnValue = [];
-        db.each("SELECT pixel_id, x, y, color FROM pixels", function (err, row) {
-            returnValue.push({ x: row.x, y: row.y, color: row.color })
-        }, () => {
-            resolve(returnValue);
-        })
-    })
-}
-
-function setPixel(pixel_id, x, y, color) {
+function setPixel(x, y, color) {
     //Add auth check
-    db.run("REPLACE INTO pixels (pixel_id,x,y,color) VALUES ('" + pixel_id + "'," + x + "," + y + ",'" + color + "')");
+    const stmt = db.prepare("REPLACE INTO pixels (x,y,color) VALUES (?,?,?)");
+    stmt.run(x, y, color)
+
+    let value = (CANVAS_Y * x) - CANVAS_Y + y - 1
+    canvas[value] = color
+    canvasToFile()
 }
 
 function authenticateUser() {
 
+}
+
+function loadCanvasFromDB() {
+    const rows = db.prepare('SELECT * FROM pixels').all();
+    rows.forEach(row => {
+        let value = (CANVAS_Y * row.x) - CANVAS_Y + row.y - 1
+        canvas[value] = row.color
+    });
+    canvasToFile()
+}
+
+function canvasToFile() {
+    fs.writeFile("../public/canvas.dat", canvas, () => { })
+}
+
+function fillDB() {
+    const insert = db.prepare("REPLACE INTO pixels (x,y,color) VALUES (@x,@y,@color)");
+
+    const values = []
+    for (let x = 1; x <= 350; x++) {
+        for (let y = 1; y <= 450; y++) {
+            values.push({ x: x, y: y, color: 11 })
+        }
+    }
+    const transaction = db.transaction((values) => {
+        for (const value of values) {
+            insert.run(value);
+        }
+    });
+    transaction(values)
 }

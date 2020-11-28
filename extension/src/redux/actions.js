@@ -17,10 +17,3 @@ export const recievedPixel = (x, y, color) => ({
         color: color
     }
 });
-
-export const pixelDownload = (pixelArray) => ({
-    type: PIXEL_DOWNLOAD,
-    payload: {
-        pixelArray: pixelArray
-    }
-});

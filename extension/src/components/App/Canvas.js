@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import get_color_hex from './color/colorPalette'
 
 export default class CanvasComponent extends React.Component {
     constructor(props) {
@@ -26,12 +27,12 @@ export default class CanvasComponent extends React.Component {
         const rect = this.canvas.current.getBoundingClientRect()
         const x = Math.floor((e.clientX - rect.left) * this.canvas.current.width / rect.width)
         const y = Math.floor((e.clientY - rect.top) * this.canvas.current.height / rect.height)
-        const color = random_rgba();
+        const color = 32; //JUST A PLACEHOLDER
         this.props.dispatch(x, y, color)
     }
     updatePixel(x, y, color) {
         const ctx = this.canvas.current.getContext('2d');
-        ctx.fillStyle = color;
+        ctx.fillStyle = get_color_hex(color);
         ctx.fillRect(x, y, 1, 1);
     }
 
@@ -47,7 +48,7 @@ CanvasComponent.propTypes = {
     pixels: PropTypes.arrayOf(PropTypes.shape({
         x: PropTypes.number.isRequired,
         y: PropTypes.number.isRequired,
-        color: PropTypes.string.isRequired
+        color: PropTypes.number.isRequired
     }).isRequired
     ).isRequired
 }

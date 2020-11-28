@@ -19,15 +19,6 @@ const pixels = (state = initialState, action) => {
                         color: action.payload.color
                     }]
             };
-        case PIXEL_DOWNLOAD:
-            let newPixelArray = [
-                ...state.pixelArray,
-            ]
-            newPixelArray.push(...action.payload.pixelArray)
-            return {
-                ...state,
-                pixelArray: newPixelArray
-            };
         default:
             return state;
     }

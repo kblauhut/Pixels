@@ -10,9 +10,6 @@ const setupSocket = (dispatch) => {
             case types.SET_PIXEL:
                 dispatch(recievedPixel(data.message.x, data.message.y, data.message.color))
                 break
-            case types.PIXEL_DOWNLOAD:
-                dispatch(pixelDownload(data.message))
-                break
             default:
                 break
         }
