@@ -7,7 +7,10 @@ export default class CanvasComponent extends React.Component {
         super(props);
         this.canvas = React.createRef();
     }
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
+        if (this.props.canvas != undefined && this.props.canvas !== prevProps.canvas) {
+            this.loadCanvas(this.props.canvas.x, this.props.canvas.y, this.props.canvas.canvas)
+        }
         if (this.props.pixels.length != 0) {
             this.props.pixels.forEach(element => {
                 this.updatePixel(element.x, element.y, element.color)
@@ -21,14 +24,28 @@ export default class CanvasComponent extends React.Component {
                 this.updatePixel(element.x, element.y, element.color)
             });
         }
+        if (this.props.canvas != undefined) {
+            this.loadCanvas(this.props.canvas.x, this.props.canvas.y, this.props.canvas.canvas)
+        }
     }
 
     onClick = (e) => {
         const rect = this.canvas.current.getBoundingClientRect()
         const x = Math.floor((e.clientX - rect.left) * this.canvas.current.width / rect.width)
         const y = Math.floor((e.clientY - rect.top) * this.canvas.current.height / rect.height)
-        const color = 32; //JUST A PLACEHOLDER
+        const color = 0; //JUST A PLACEHOLDER
         this.props.dispatch(x, y, color)
+    }
+    loadCanvas(x_size, y_size, canvasArray) {
+        const ctx = this.canvas.current.getContext('2d');
+        let i = 0;
+        for (let x = 1; x < x_size; x++) {
+            for (let y = 0; y < y_size; y++) {
+                ctx.fillStyle = get_color_hex(canvasArray[i]);
+                ctx.fillRect(x, y, 1, 1);
+                i++;
+            }
+        }
     }
     updatePixel(x, y, color) {
         const ctx = this.canvas.current.getContext('2d');
@@ -50,7 +67,12 @@ CanvasComponent.propTypes = {
         y: PropTypes.number.isRequired,
         color: PropTypes.number.isRequired
     }).isRequired
-    ).isRequired
+    ).isRequired,
+    canvas: PropTypes.shape({
+        x: PropTypes.number,
+        y: PropTypes.number,
+        canvas: PropTypes.arrayOf(PropTypes.number)
+    })
 }
 
 

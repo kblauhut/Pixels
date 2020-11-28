@@ -12,7 +12,6 @@ db.prepare("CREATE TABLE IF NOT EXISTS pixels (x INTEGER NOT NULL, y INTEGER NOT
 db.prepare("CREATE TABLE IF NOT EXISTS users (user_id TEXT NOT NULL PRIMARY KEY, pixels_remaining INTEGER)").run()
 db.prepare("CREATE TABLE IF NOT EXISTS pixels_users (x INTEGER NOT NULL, y INTEGER NOT NULL, user_id TEXT NOT NULL, FOREIGN KEY (x,y) REFERENCES pixels(x,y), FOREIGN KEY (user_id) REFERENCES users(user_id))").run()
 
-
 loadCanvasFromDB()
 
 const broadcast = (data, ws) => {
@@ -24,6 +23,10 @@ const broadcast = (data, ws) => {
 }
 
 wss.on('connection', (ws) => {
+    ws.send(JSON.stringify({
+        type: 'LOAD_CANVAS',
+        message: { x: CANVAS_X, y: CANVAS_Y, canvas: Array.from(canvas) },
+    }))
     ws.on('message', (message) => {
         const data = JSON.parse(message)
         switch (data.type) {
@@ -47,7 +50,6 @@ function setPixel(x, y, color) {
 
     let value = (CANVAS_Y * x) - CANVAS_Y + y - 1
     canvas[value] = color
-    canvasToFile()
 }
 
 function authenticateUser() {
@@ -60,11 +62,6 @@ function loadCanvasFromDB() {
         let value = (CANVAS_Y * row.x) - CANVAS_Y + row.y - 1
         canvas[value] = row.color
     });
-    canvasToFile()
-}
-
-function canvasToFile() {
-    fs.writeFile("../public/canvas.dat", canvas, () => { })
 }
 
 function fillDB() {

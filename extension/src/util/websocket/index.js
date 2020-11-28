@@ -1,5 +1,5 @@
 import * as types from '../../redux/actionTypes'
-import { recievedPixel, pixelDownload } from '../../redux/actions'
+import { recievedPixel, loadCanvas } from '../../redux/actions'
 
 const setupSocket = (dispatch) => {
     const socket = new WebSocket('ws://localhost:8989')
@@ -10,6 +10,8 @@ const setupSocket = (dispatch) => {
             case types.SET_PIXEL:
                 dispatch(recievedPixel(data.message.x, data.message.y, data.message.color))
                 break
+            case types.LOAD_CANVAS:
+                dispatch(loadCanvas(data.message.x, data.message.y, data.message.canvas))
             default:
                 break
         }

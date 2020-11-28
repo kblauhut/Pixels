@@ -10,7 +10,7 @@ const mapDispatchToProps = dispatch => ({
 
 function mapStateToProps(state, ownProps) {
     const { pixels } = state
-    return { pixels: pixels.pixelArray }
+    return { pixels: pixels.pixelArray, canvas: pixels.canvas }
 }
 
 
