@@ -10,6 +10,26 @@
     color:#e5e3e8;
 }
 
+.bottomBarWrapper{
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    width: 100%;
+}
+
+.bottomBar{
+    background-color: lightgrey;
+    height: 50px;
+    margin: auto;
+    width: 100%;
+}
+
+.pixelsRemaining{}
+
+.purchaseButton{}
+
+.colorButton{}
+
 html, body {
   overflow: hidden;
   margin: 0px;

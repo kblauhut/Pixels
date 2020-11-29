@@ -11,12 +11,12 @@ export default class BottomBar extends React.Component {
 
     render() {
         return [
-            <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%' }}>
+            <div className={'bottomBarWrapper'} >
                 {this.state.showColorChooser ? <GithubPicker /> : null}
-                <div style={{ backgroundColor: 'lightgrey', height: 50, margin: 'auto', width: '100%' }}>
-                    <div>10px remaining</div>
-                    <button>Purchase Pixels</button>
-                    <button onClick={() => this.setState({ showColorChooser: !this.state.showColorChooser })}>Choose Color</button>
+                <div className={'bottomBar'}>
+                    <div className={'pixelsRemaining'}>10px remaining</div>
+                    <button className={'purchaseButton'} >Purchase Pixels</button>
+                    <button className={'colorButton'} onClick={() => this.setState({ showColorChooser: !this.state.showColorChooser })}>Choose Color</button>
                 </div>
             </div >
         ];
