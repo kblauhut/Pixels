@@ -11,8 +11,11 @@ export default class PanZoomContainer extends React.PureComponent {
                 enableBoundingBox={true}
                 minZoom={0.5}
                 maxZoom={40}
+                autoCenter={true}
                 preventPan={false}
-                style={{ cursor: "auto" }}
+                style={{
+                    cursor: "auto"
+                }}
             >
                 <CanvasContainer />
             </PanZoom>
