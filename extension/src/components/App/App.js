@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Authentication from '../../util/Authentication/Authentication'
-import PanZoomContainer from './PanZoomContainer'
+import PanZoomContainer from './components/PanZoomContainer'
 import './App.css'
 
 export default class App extends React.Component {

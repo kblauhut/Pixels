@@ -1,6 +1,6 @@
 import React from 'react'
 import { PanZoom } from 'react-easy-panzoom'
-import { CanvasContainer } from './containers/Canvas';
+import { CanvasContainer } from '../containers/Canvas';
 
 export default class PanZoomContainer extends React.PureComponent {
     render() {

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import CanvasComponent from '../Canvas'
+import CanvasComponent from '../components/Canvas'
 import { setPixel } from '../../../redux/actions'
 
 const mapDispatchToProps = dispatch => ({

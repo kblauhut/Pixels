@@ -55,7 +55,7 @@ export default class CanvasComponent extends React.Component {
 
     render() {
         return (
-            <canvas ref={this.canvas} onDragEnd={this.onDragEnd} onClick={this.onClick} style={{ imageRendering: "pixelated" }} width={300} height={450} />
+            <canvas ref={this.canvas} onDragEnd={this.onDragEnd} onClick={this.onClick} style={{ imageRendering: "pixelated" }} width={this.props.canvas.x} height={this.props.canvas.y} />
         );
     }
 }
