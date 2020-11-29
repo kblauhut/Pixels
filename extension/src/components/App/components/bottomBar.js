@@ -14,9 +14,12 @@ export default class BottomBar extends React.Component {
             <div className={'bottomBarWrapper'} >
                 {this.state.showColorChooser ? <GithubPicker /> : null}
                 <div className={'bottomBar'}>
-                    <div className={'pixelsRemaining'}>10px remaining</div>
+                    {/*<div className={'pixelsRemaining'}>10px remaining</div>
+                     */}
+                    <button className={'colorButton'} onClick={() => this.setState({ showColorChooser: !this.state.showColorChooser })}>Color
+                    <div className={'colorButtonCircle'} />
+                    </button>
                     <button className={'purchaseButton'} >Purchase Pixels</button>
-                    <button className={'colorButton'} onClick={() => this.setState({ showColorChooser: !this.state.showColorChooser })}>Choose Color</button>
                 </div>
             </div >
         ];

@@ -18,7 +18,7 @@
 }
 
 .bottomBar{
-    background-color: lightgrey;
+    background-color: grey;
     height: 50px;
     margin: auto;
     width: 100%;
@@ -26,9 +26,33 @@
 
 .pixelsRemaining{}
 
-.purchaseButton{}
+.purchaseButton, .colorButton {
+    background-color: pink;
+    border-radius:28px;
+    border: 0px;
+    outline:none;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:16px;
+	padding:8px 16px;
+    text-decoration:none;
+    margin: 4px;
+    float: right;
+}
 
-.colorButton{}
+.colorButton{
+    background-color: lightgrey;
+}
+
+.colorButtonCircle{
+    margin-left: 6px;
+    float: right;
+    width: 16px;
+    height: 16px;
+    background: grey;
+    border-radius: 50%
+}
 
 html, body {
   overflow: hidden;
