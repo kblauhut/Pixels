@@ -1,4 +1,4 @@
-import { SET_PIXEL, RECIEVED_PIXEL, LOAD_CANVAS } from './actionTypes'
+import { SET_PIXEL, RECIEVED_PIXEL, LOAD_CANVAS, UPDATE_COLOR } from './actionTypes'
 
 export const setPixel = (x, y, color) => ({
     type: SET_PIXEL,
@@ -24,5 +24,12 @@ export const loadCanvas = (x, y, canvas) => ({
         x: x,
         y: y,
         canvas: canvas
+    }
+});
+
+export const updateColor = (color) => ({
+    type: UPDATE_COLOR,
+    payload: {
+        color: color
     }
 });

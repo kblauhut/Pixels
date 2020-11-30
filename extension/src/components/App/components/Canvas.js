@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import get_color_hex from './color/colorPalette'
+import { get_color_hex } from './color/colorPalette'
 
 export default class CanvasComponent extends React.Component {
     constructor(props) {
@@ -33,8 +33,7 @@ export default class CanvasComponent extends React.Component {
         const rect = this.canvas.current.getBoundingClientRect()
         const x = Math.floor((e.clientX - rect.left) * this.canvas.current.width / rect.width)
         const y = Math.floor((e.clientY - rect.top) * this.canvas.current.height / rect.height)
-        const color = 0; //JUST A PLACEHOLDER
-        this.props.dispatch(x, y, color)
+        this.props.dispatch(x, y, this.props.color)
     }
     loadCanvas(x_size, y_size, canvasArray) {
         const ctx = this.canvas.current.getContext('2d');
@@ -72,7 +71,8 @@ CanvasComponent.propTypes = {
         x: PropTypes.number,
         y: PropTypes.number,
         canvas: PropTypes.arrayOf(PropTypes.number)
-    })
+    }),
+    color: PropTypes.number.isRequired
 }
 
 

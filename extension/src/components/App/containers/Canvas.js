@@ -9,8 +9,8 @@ const mapDispatchToProps = dispatch => ({
 })
 
 function mapStateToProps(state, ownProps) {
-    const { pixels } = state
-    return { pixels: pixels.pixelArray, canvas: pixels.canvas }
+    const { pixels, color } = state
+    return { pixels: pixels.pixelArray, canvas: pixels.canvas, color: color.color }
 }
 
 

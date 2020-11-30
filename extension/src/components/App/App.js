@@ -2,7 +2,7 @@ import React from 'react'
 
 import Authentication from '../../util/Authentication/Authentication'
 import PanZoomContainer from './components/PanZoomContainer'
-import BottomBar from './components/bottomBar'
+import { BottomBarContainer } from './containers/bottomBar'
 import './App.css'
 
 export default class App extends React.Component {
@@ -80,7 +80,7 @@ export default class App extends React.Component {
                 <div className="App">
                     <div className={this.state.theme === 'light' ? 'App-light' : 'App-dark'} >
                         <PanZoomContainer />
-                        <BottomBar />
+                        <BottomBarContainer />
 
                         {/* 
                         <p>Hello world!</p>
