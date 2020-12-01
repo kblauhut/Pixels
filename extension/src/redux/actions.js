@@ -1,5 +1,5 @@
 import {
-  SET_PIXEL, RECIEVED_PIXEL, LOAD_CANVAS, UPDATE_COLOR,
+  SET_PIXEL, RECIEVED_PIXEL, LOAD_CANVAS, UPDATE_COLOR, AUTHENTICATE
 } from './actionTypes';
 
 export const setPixel = (x, y, color) => ({
@@ -33,5 +33,12 @@ export const updateColor = (color) => ({
   type: UPDATE_COLOR,
   payload: {
     color,
+  },
+});
+
+export const authenticate = (token) => ({
+  type: AUTHENTICATE,
+  payload: {
+    token,
   },
 });

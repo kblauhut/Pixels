@@ -1,15 +1,16 @@
 import React from 'react'
 
+import { connect } from 'react-redux'
 import Authentication from '../../util/Authentication/Authentication'
 import PanZoomContainer from './components/PanZoomContainer'
 import { BottomBarContainer } from './containers/bottomBar'
+import { authenticate } from '../../redux/actions'
 import './App.css'
 
-export default class App extends React.Component {
+class AppComponent extends React.Component {
     constructor(props) {
         super(props)
         this.Authentication = new Authentication()
-
         //if the extension is running on twitch or dev rig, set the shorthand here. otherwise, set to null. 
         this.twitch = window.Twitch ? window.Twitch.ext : null
         this.state = {
@@ -40,10 +41,9 @@ export default class App extends React.Component {
         if (this.twitch) {
             this.twitch.onAuthorized((auth) => {
                 this.Authentication.setToken(auth.token, auth.userId)
+                this.props.dispatch(auth.token)
                 if (!this.state.finishedLoading) {
                     // if the component hasn't finished loading (as in we've not set up after getting a token), let's set it up now.
-                    console.log(auth.token)
-                    console.log(auth.userId)
                     // now we've done the setup for the component, let's set the state to true to force a rerender with the correct data.
                     this.setState(() => {
                         return { finishedLoading: true }
@@ -102,3 +102,11 @@ export default class App extends React.Component {
 
     }
 }
+
+const mapDispatchToProps = dispatch => ({
+    dispatch: (token) => {
+        dispatch(authenticate(token))
+    }
+})
+
+export const App = connect(null, mapDispatchToProps)(AppComponent)

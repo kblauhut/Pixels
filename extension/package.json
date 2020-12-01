@@ -9,7 +9,7 @@
     "start": "webpack-dev-server --mode development",
     "cert": "./bin/generate_cert.sh server",
     "host": "webpack-dev-server --mode development --devrig",
-    "lint": "eslint src/**/*.js"
+    "lint": "eslint --ext .js src/"
   },
   "keywords": [],
   "author": "",

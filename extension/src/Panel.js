@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from "redux"
 import createSagaMiddleware from 'redux-saga'
 
-import App from "./components/App/App"
+import { App } from "./components/App/App"
 import rootReducer from "./redux/reducers"
 import setupSocket from './util/websocket'
 import handleNewPixel from './sagas'
