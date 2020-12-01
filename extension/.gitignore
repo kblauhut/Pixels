@@ -118,6 +118,3 @@ dist
 # sqlite
 *.sqlite
 *.sqlite-journal
-
-# other stuff
-canvas.dat
