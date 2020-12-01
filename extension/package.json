@@ -8,7 +8,8 @@
     "build": "webpack --mode production",
     "start": "webpack-dev-server --mode development",
     "cert": "./bin/generate_cert.sh server",
-    "host": "webpack-dev-server --mode development --devrig"
+    "host": "webpack-dev-server --mode development --devrig",
+    "lint": "eslint src/**/*.js server/**/*.js"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +24,12 @@
     "css-loader": "^3.6.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
+    "eslint": "^7.14.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^4.5.0",
     "isomorphic-fetch": "^2.2.1",
