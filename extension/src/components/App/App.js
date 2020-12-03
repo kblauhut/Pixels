@@ -81,7 +81,7 @@ class AppComponent extends React.Component {
                 <div className="App">
                     <div className={this.state.theme === 'light' ? 'App-light' : 'App-dark'} >
                         <PanZoomContainer />
-                        <BottomBarContainer />
+                        <BottomBarContainer twitch={this.twitch} />
 
                         {/* 
                         <p>Hello world!</p>
