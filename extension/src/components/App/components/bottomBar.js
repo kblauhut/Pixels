@@ -14,19 +14,19 @@ export default class BottomBarComponent extends React.Component {
         }
     }
 
-    dispatchColorTostate(color) {
-        this.props.dispatch(get_color_index(color))
+    dispatchColorToState(color) {
+        this.props.dispatchColor(get_color_index(color))
     }
 
     confirmPurchase(sku) {
-        this.props.twitch.bits.setUseLoopback(true)
-        console.log(this.props.twitch);
-        console.log(this.props.twitch.features.isBitsEnabled)
-        window.Twitch.ext.bits.useBits(sku);
-        this.props.twitch.bits.onTransactionComplete(function (transaction) {
-            console.log(transaction);
+        function callback(transaction, props) {
+            props.dispatchPurchase(transaction)
         }
-        )
+
+        this.props.twitch.bits.setUseLoopback(true);
+        window.Twitch.ext.bits.useBits(sku);
+
+        this.props.twitch.bits.onTransactionComplete((transaction) => callback(transaction, this.props));
     }
 
     render() {
@@ -39,7 +39,7 @@ export default class BottomBarComponent extends React.Component {
                         color={this.state.color}
                         colorUpdate={(color) => {
                             this.setState({ color: color })
-                            this.dispatchColorTostate(color)
+                            this.dispatchColorToState(color)
                         }}
                     /> : null
                 }
@@ -75,6 +75,13 @@ export default class BottomBarComponent extends React.Component {
 }
 
 BottomBarComponent.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    color: PropTypes.number.isRequired
+    dispatchColor: PropTypes.func.isRequired,
+    dispatchPurchase: PropTypes.func.isRequired,
+    color: PropTypes.number.isRequired,
+    userData: PropTypes.shape({
+        signedIn: PropTypes.bool,
+        userId: PropTypes.string,
+        cooldown: PropTypes.number,
+        purchasedBits: PropTypes.number
+    }),
 }

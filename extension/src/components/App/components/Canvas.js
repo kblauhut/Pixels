@@ -38,7 +38,7 @@ export default class CanvasComponent extends React.Component {
     loadCanvas(x_size, y_size, canvasArray) {
         const ctx = this.canvas.current.getContext('2d');
         let i = 0;
-        for (let x = 1; x < x_size; x++) {
+        for (let x = 0; x < x_size; x++) {
             for (let y = 0; y < y_size; y++) {
                 ctx.fillStyle = get_color_hex(canvasArray[i]);
                 ctx.fillRect(x, y, 1, 1);
