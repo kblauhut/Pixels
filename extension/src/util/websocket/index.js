@@ -2,7 +2,7 @@ import * as types from '../../redux/actionTypes'
 import { recievedPixel, loadCanvas } from '../../redux/actions'
 
 const setupSocket = (dispatch) => {
-    const socket = new WebSocket('ws://localhost:8989')
+    const socket = new WebSocket('wss://localhost:8989')
 
     socket.onmessage = (event) => {
         const data = JSON.parse(event.data)
