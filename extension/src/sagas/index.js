@@ -4,13 +4,31 @@ import 'regenerator-runtime/runtime';
 
 const sendAction = function* sendAction(params) {
   yield takeEvery(types.SET_PIXEL, (action) => {
-    params.socket.send(JSON.stringify(action));
+    if (params.socket.readyState === 1) {
+      params.socket.send(JSON.stringify(action))
+    } else {
+      params.socket.onopen = () => {
+        params.socket.send(JSON.stringify(action))
+      }
+    }
   });
   yield takeEvery(types.AUTHENTICATE, (action) => {
-    params.socket.send(JSON.stringify(action));
+    if (params.socket.readyState === 1) {
+      params.socket.send(JSON.stringify(action))
+    } else {
+      params.socket.onopen = () => {
+        params.socket.send(JSON.stringify(action))
+      }
+    }
   });
   yield takeEvery(types.PURCHASE, (action) => {
-    params.socket.send(JSON.stringify(action));
+    if (params.socket.readyState === 1) {
+      params.socket.send(JSON.stringify(action))
+    } else {
+      params.socket.onopen = () => {
+        params.socket.send(JSON.stringify(action))
+      }
+    }
   })
 };
 

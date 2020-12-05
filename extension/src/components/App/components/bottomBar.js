@@ -23,9 +23,7 @@ export default class BottomBarComponent extends React.Component {
             props.dispatchPurchase(transaction)
         }
 
-        this.props.twitch.bits.setUseLoopback(true);
-        window.Twitch.ext.bits.useBits(sku);
-
+        this.props.twitch.bits.useBits(sku);
         this.props.twitch.bits.onTransactionComplete((transaction) => callback(transaction, this.props));
     }
 

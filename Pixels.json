@@ -1,7 +1,7 @@
 {
   "allowHttpBackend": false,
-  "backendCommand": "",
-  "backendFolderName": "",
+  "backendCommand": "yarn start",
+  "backendFolderName": "/home/kblauhut/Projects/ebs",
   "certificateExceptions": [
     {
       "isAllowed": true,
@@ -46,7 +46,7 @@
       "viewerType": "Broadcaster"
     },
     {
-      "channelId": "265737932",
+      "channelId": "93408776",
       "configurationAnchor": "panel",
       "displayChannelName": "kodeeey",
       "features": {
@@ -60,56 +60,12 @@
       },
       "id": "3",
       "isPopout": false,
-      "label": "",
-      "linked": true,
-      "linkedUserId": "265737932",
-      "orientation": "Portrait",
-      "type": "panel",
-      "viewerType": "Logged-In Viewer"
-    },
-    {
-      "channelId": "93408776",
-      "configurationAnchor": "panel",
-      "displayChannelName": "kodeeey",
-      "features": {
-        "isBitsEnabled": true,
-        "isChatEnabled": false,
-        "isSubscriptionStatusAvailable": false
-      },
-      "frameSize": {
-        "width": 1280,
-        "height": 720
-      },
-      "id": "4",
-      "isPopout": false,
-      "label": "Bits Test",
-      "linked": true,
-      "linkedUserId": "155482013",
-      "orientation": "Portrait",
-      "type": "panel",
-      "viewerType": "Logged-In Viewer"
-    },
-    {
-      "channelId": "93408776",
-      "configurationAnchor": "panel",
-      "displayChannelName": "kodeeey",
-      "features": {
-        "isBitsEnabled": false,
-        "isChatEnabled": false,
-        "isSubscriptionStatusAvailable": false
-      },
-      "frameSize": {
-        "width": 1280,
-        "height": 720
-      },
-      "id": "5",
-      "isPopout": false,
-      "label": "no bits",
+      "label": "test",
       "linked": false,
       "linkedUserId": "",
       "orientation": "Portrait",
       "type": "panel",
-      "viewerType": "Broadcaster"
+      "viewerType": "Logged-In Viewer"
     }
   ],
   "manifest": {
@@ -120,18 +76,18 @@
     "canInstall": true,
     "configUrl": "https://localhost:8080/config.html",
     "configurationLocation": "none",
-    "description": "",
+    "description": "Lets viewers color in pixels, which can be purchased with bits, within the extension panel.",
     "eulaTosUrl": "",
     "hasChatSupport": false,
     "iconUrl": "",
     "iconUrls": {},
     "id": "42xbn10yu3zukfc0f82ludfx6q4fd8",
     "installationCount": -42,
-    "liveConfigUrl": "",
+    "liveConfigUrl": "https://localhost:8080/config.html",
     "name": "Pixels",
     "panelHeight": 500,
     "privacyPolicyUrl": "",
-    "requestIdentityLink": false,
+    "requestIdentityLink": true,
     "requiredBroadcasterAbilities": [],
     "screenshotUrls": [],
     "sku": "",
@@ -141,7 +97,7 @@
     "supportEmail": "koljablauhut@gmail.com",
     "vendorCode": "",
     "version": "0.0.1",
-    "viewerSummary": "",
+    "viewerSummary": "Lets viewers color in pixels, which can be purchased with bits, within the extension panel.",
     "viewerUrl": "https://localhost:8080/panel.html",
     "viewerUrls": {
       "panel": "https://localhost:8080/panel.html"
@@ -153,6 +109,10 @@
         "canLinkExternalContent": false
       },
       "config": {
+        "viewerUrl": "https://localhost:8080/config.html",
+        "canLinkExternalContent": false
+      },
+      "liveConfig": {
         "viewerUrl": "https://localhost:8080/config.html",
         "canLinkExternalContent": false
       }
