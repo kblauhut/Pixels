@@ -39,13 +39,8 @@ class AppComponent extends React.Component {
     componentDidMount() {
         if (this.twitch) {
             this.twitch.onAuthorized((auth) => {
-                this.twitch.rig.log("AUTH: " + auth.userId)
-                console.log("AUTH: " + auth.userId);
-                this.Authentication.setToken(auth.token, auth.userId)
                 this.props.dispatch(auth.token)
                 if (!this.state.finishedLoading) {
-                    // if the component hasn't finished loading (as in we've not set up after getting a token), let's set it up now.
-                    // now we've done the setup for the component, let's set the state to true to force a rerender with the correct data.
                     this.setState(() => {
                         return { finishedLoading: true }
                     })
@@ -83,7 +78,6 @@ class AppComponent extends React.Component {
             return (
                 <div className="App">
                     <div className={this.state.theme === 'light' ? 'Config-light' : 'Config-dark'}>
-                        Loading...
                     </div>
                 </div>
             )

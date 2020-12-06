@@ -23,7 +23,7 @@ module.exports = (_env, argv) => {
     LiveConfig: {
       path: "./src/LiveConfig.js",
       outputHtml: "live_config.html",
-      build: true
+      build: false
     },
   }
 
