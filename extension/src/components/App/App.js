@@ -2,7 +2,6 @@ import React from 'react'
 
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import Authentication from '../../util/Authentication/Authentication'
 import PanZoomContainer from './components/PanZoomContainer'
 import { BottomBarContainer } from './containers/bottomBar'
 import { authenticate } from '../../redux/actions'
@@ -11,7 +10,6 @@ import './App.css'
 class AppComponent extends React.Component {
     constructor(props) {
         super(props)
-        this.Authentication = new Authentication()
         this.twitch = window.Twitch ? window.Twitch.ext : null
         this.state = {
             finishedLoading: false,
@@ -70,7 +68,7 @@ class AppComponent extends React.Component {
                 <div className="App">
                     <div className={this.state.theme === 'light' ? 'App-light' : 'App-dark'} >
                         <PanZoomContainer />
-                        <BottomBarContainer twitch={this.twitch} />
+                        <BottomBarContainer />
                     </div>
                 </div >
             )

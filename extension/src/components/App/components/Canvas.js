@@ -2,11 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { get_color_hex } from './color/colorPalette'
 
+
 export default class CanvasComponent extends React.Component {
     constructor(props) {
         super(props);
         this.canvas = React.createRef();
     }
+
     componentDidUpdate(prevProps) {
         if (this.props.canvas != undefined && this.props.canvas !== prevProps.canvas) {
             this.loadCanvas(this.props.canvas.x, this.props.canvas.y, this.props.canvas.canvas)
@@ -30,11 +32,14 @@ export default class CanvasComponent extends React.Component {
     }
 
     onClick = (e) => {
+        if (!this.props.canPlace) return;
         const rect = this.canvas.current.getBoundingClientRect()
         const x = Math.floor((e.clientX - rect.left) * this.canvas.current.width / rect.width)
         const y = Math.floor((e.clientY - rect.top) * this.canvas.current.height / rect.height)
-        this.props.dispatch(x, y, this.props.color)
+        this.props.dispatchPixel(x, y, this.props.color)
+        this.props.dispatchCanPlace(false)
     }
+
     loadCanvas(x_size, y_size, canvasArray) {
         const ctx = this.canvas.current.getContext('2d');
         let i = 0;
@@ -60,7 +65,8 @@ export default class CanvasComponent extends React.Component {
 }
 
 CanvasComponent.propTypes = {
-    dispatch: PropTypes.func.isRequired,
+    dispatchPixel: PropTypes.func.isRequired,
+    dispatchCanPlace: PropTypes.func.isRequired,
     pixels: PropTypes.arrayOf(PropTypes.shape({
         x: PropTypes.number.isRequired,
         y: PropTypes.number.isRequired,
@@ -72,7 +78,8 @@ CanvasComponent.propTypes = {
         y: PropTypes.number,
         canvas: PropTypes.arrayOf(PropTypes.number)
     }),
-    color: PropTypes.number.isRequired
+    color: PropTypes.number.isRequired,
+    canPlace: PropTypes.bool.isRequired
 }
 
 

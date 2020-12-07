@@ -1,16 +1,19 @@
 import { connect } from 'react-redux'
 import CanvasComponent from '../components/Canvas'
-import { setPixel } from '../../../redux/actions'
+import { setPixel, canPlace } from '../../../redux/actions'
 
 const mapDispatchToProps = dispatch => ({
-    dispatch: (x, y, color) => {
+    dispatchPixel: (x, y, color) => {
         dispatch(setPixel(x, y, color))
+    },
+    dispatchCanPlace: (placeable) => {
+        dispatch(canPlace(placeable))
     }
 })
 
 function mapStateToProps(state, ownProps) {
-    const { pixels, color } = state
-    return { pixels: pixels.pixelArray, canvas: pixels.canvas, color: color.color }
+    const { pixels, color, user } = state
+    return { pixels: pixels.pixelArray, canvas: pixels.canvas, color: color.color, canPlace: user.canPlace }
 }
 
 

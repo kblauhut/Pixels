@@ -1,14 +1,8 @@
 import React from 'react';
-import { CirclePicker } from 'react-color'
-import { palette } from './color/colorPalette';
 
 export default class PurchaseList extends React.PureComponent {
     constructor(props) {
         super(props)
-    }
-
-    getColors() {
-        return palette;
     }
 
     render() {
@@ -41,18 +35,6 @@ export default class PurchaseList extends React.PureComponent {
                             1000 Pixels
                             <button className={'bitButton'} onClick={() => this.props.purchase("pixels1000bit")}>1000 Bits</button>
                         </div>
-
-                        {/* 
-                <CirclePicker
-                    className={'colors'}
-                    width={300}
-                    circleSize={30}
-                    circleSpacing={20}
-                    colors={this.getColors()}
-                    color={this.props.color}
-                    onChange={(color) => this.props.colorUpdate(color.hex)}
-                />
-                     */}
                     </ol>
                 </div>
             </div >

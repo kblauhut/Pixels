@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import BottomBarComponent from '../components/bottomBar'
-import { purchase, updateColor } from '../../../redux/actions'
+import { purchase, updateColor, canPlace } from '../../../redux/actions'
 
 const mapDispatchToProps = dispatch => ({
     dispatchColor: (color) => {
@@ -8,6 +8,9 @@ const mapDispatchToProps = dispatch => ({
     },
     dispatchPurchase: (transaction) => {
         dispatch(purchase(transaction))
+    },
+    dispatchCanPlace: (placeable) => {
+        dispatch(canPlace(placeable))
     }
 })
 

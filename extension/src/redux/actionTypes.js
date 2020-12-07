@@ -5,3 +5,4 @@ export const UPDATE_COLOR = 'UPDATE_COLOR';
 export const AUTHENTICATE = 'AUTHENTICATE';
 export const USER_DATA = 'USER_DATA';
 export const PURCHASE = 'PURCHASE';
+export const CAN_PLACE = 'CAN_PLACE';

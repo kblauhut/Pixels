@@ -66,6 +66,28 @@
       "orientation": "Portrait",
       "type": "panel",
       "viewerType": "Logged-In Viewer"
+    },
+    {
+      "channelId": "93408776",
+      "configurationAnchor": "panel",
+      "displayChannelName": "kodeeey",
+      "features": {
+        "isBitsEnabled": true,
+        "isChatEnabled": false,
+        "isSubscriptionStatusAvailable": false
+      },
+      "frameSize": {
+        "width": 1280,
+        "height": 720
+      },
+      "id": "4",
+      "isPopout": false,
+      "label": "",
+      "linked": true,
+      "linkedUserId": "155482013",
+      "orientation": "Portrait",
+      "type": "panel",
+      "viewerType": "Logged-In Viewer"
     }
   ],
   "manifest": {
