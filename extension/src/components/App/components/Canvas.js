@@ -32,7 +32,7 @@ export default class CanvasComponent extends React.Component {
     }
 
     onClick = (e) => {
-        if (!this.props.canPlace) return;
+        if (!this.props.canPlace || this.props.blockPixelPlace) return;
         const rect = this.canvas.current.getBoundingClientRect()
         const x = Math.floor((e.clientX - rect.left) * this.canvas.current.width / rect.width)
         const y = Math.floor((e.clientY - rect.top) * this.canvas.current.height / rect.height)
@@ -59,7 +59,13 @@ export default class CanvasComponent extends React.Component {
 
     render() {
         return (
-            <canvas ref={this.canvas} onDragEnd={this.onDragEnd} onClick={this.onClick} style={{ imageRendering: "pixelated" }} width={this.props.canvas.x} height={this.props.canvas.y} />
+            <canvas
+                className={this.props.class}
+                ref={this.canvas}
+                onClick={this.onClick}
+                width={this.props.canvas.x}
+                height={this.props.canvas.y}
+            />
         );
     }
 }

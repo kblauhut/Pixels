@@ -9,7 +9,7 @@ export default class UserInfo extends React.PureComponent {
     render() {
         return [
             <div className={'userInfo'}>
-                <div className={'premiumPixels'}>
+                <div className={this.props.premiumPixels !== 0 ? 'premiumPixels' : 'premiumPixels-none'}>
                     <FaRegStar className={'icon'} />
                     {this.props.premiumPixels}
                 </div>

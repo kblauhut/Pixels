@@ -39,7 +39,7 @@ export default class BottomBarComponent extends React.Component {
         if (this.props.userData !== prevProps.userData) {
             clearTimeout(this.timeout);
             this.setState({
-                cooldown: Math.ceil(this.props.userData.cooldown / 1000) + 1,
+                cooldown: this.props.userData.purchasedPixels !== 0 ? 0 : Math.ceil(this.props.userData.cooldown / 1000) + 1,
                 purchasedPixels: this.props.userData.purchasedPixels
             }, () => {
                 if (this.state.purchasedPixels == 0) {
@@ -47,6 +47,7 @@ export default class BottomBarComponent extends React.Component {
                 }
             })
         }
+
         if (this.state.cooldown == 0 || this.state.purchasedPixels != 0) {
             this.props.dispatchCanPlace(true)
         }
@@ -54,7 +55,6 @@ export default class BottomBarComponent extends React.Component {
 
 
     confirmPurchase(sku) {
-        console.log(this.props.userData);
         function callback(transaction, props) {
             props.dispatchPurchase(transaction)
         }
