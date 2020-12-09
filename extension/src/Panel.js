@@ -20,10 +20,9 @@ const socket = setupSocket(store.dispatch)
 
 sagaMiddleware.run(sendAction, { socket })
 
-
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <App socket={socket} />
   </Provider>,
   document.getElementById("root")
 )

@@ -7,6 +7,10 @@ export default class CanvasComponent extends React.Component {
     constructor(props) {
         super(props);
         this.canvas = React.createRef();
+
+        this.state = {
+            lastPixelBuffer: { x: -1, y: -1, color: '#000000' }
+        }
     }
 
     componentDidUpdate(prevProps) {
@@ -15,7 +19,7 @@ export default class CanvasComponent extends React.Component {
         }
         if (this.props.pixels.length != 0) {
             this.props.pixels.forEach(element => {
-                this.updatePixel(element.x, element.y, element.color)
+                this.updatePixel(element.x, element.y, get_color_hex(element.color))
             });
         }
     }
@@ -23,7 +27,7 @@ export default class CanvasComponent extends React.Component {
     componentDidMount() {
         if (this.props.pixels.length != 0) {
             this.props.pixels.forEach(element => {
-                this.updatePixel(element.x, element.y, element.color)
+                this.updatePixel(element.x, element.y, get_color_hex(element.color))
             });
         }
         if (this.props.canvas != undefined) {
@@ -40,6 +44,37 @@ export default class CanvasComponent extends React.Component {
         this.props.dispatchCanPlace(false)
     }
 
+    onHover = (e) => {
+        if (!this.props.canPlace || this.props.blockPixelPlace) return;
+
+        const rect = this.canvas.current.getBoundingClientRect()
+        const x = Math.floor((e.clientX - rect.left) * this.canvas.current.width / rect.width)
+        const y = Math.floor((e.clientY - rect.top) * this.canvas.current.height / rect.height)
+
+        if (x === this.state.lastPixelBuffer.x && y === this.state.lastPixelBuffer.y) return;
+
+        const index = (this.props.canvas.y * (x + 1)) - this.props.canvas.y + y;
+        const color = this.props.canvas.canvas[index]
+
+        const lastPixelBuffer = { x: x, y: y, color: get_color_hex(color) }
+
+        this.resetPixelHover()
+        this.setState({
+            lastPixelBuffer: lastPixelBuffer
+        }, () => {
+            this.updatePixel(x, y, get_color_hex(this.props.color))
+        })
+
+    }
+
+    onMouseDown = () => {
+        this.resetPixelHover()
+    }
+
+    resetPixelHover() {
+        this.updatePixel(this.state.lastPixelBuffer.x, this.state.lastPixelBuffer.y, this.state.lastPixelBuffer.color)
+    }
+
     loadCanvas(x_size, y_size, canvasArray) {
         const ctx = this.canvas.current.getContext('2d');
         let i = 0;
@@ -53,7 +88,7 @@ export default class CanvasComponent extends React.Component {
     }
     updatePixel(x, y, color) {
         const ctx = this.canvas.current.getContext('2d');
-        ctx.fillStyle = get_color_hex(color);
+        ctx.fillStyle = color;
         ctx.fillRect(x, y, 1, 1);
     }
 
@@ -63,6 +98,8 @@ export default class CanvasComponent extends React.Component {
                 className={this.props.class}
                 ref={this.canvas}
                 onClick={this.onClick}
+                onMouseDown={this.onMouseDown}
+                onMouseMove={this.onHover}
                 width={this.props.canvas.x}
                 height={this.props.canvas.y}
             />
@@ -86,10 +123,4 @@ CanvasComponent.propTypes = {
     }),
     color: PropTypes.number.isRequired,
     canPlace: PropTypes.bool.isRequired
-}
-
-
-function random_rgba() {
-    var o = Math.round, r = Math.random, s = 255;
-    return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + 255 + ')';
 }

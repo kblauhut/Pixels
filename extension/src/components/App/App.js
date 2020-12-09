@@ -14,7 +14,8 @@ class AppComponent extends React.Component {
         this.state = {
             finishedLoading: false,
             theme: 'light',
-            isVisible: true
+            isVisible: true,
+            socketState: 0
         }
     }
 
@@ -54,6 +55,24 @@ class AppComponent extends React.Component {
                 this.contextUpdate(context, delta)
             })
         }
+
+        this.props.socket.onopen = () => {
+            this.setState({
+                socketState: this.props.socket.readyState
+            })
+        }
+
+        this.props.socket.onclose = () => {
+            this.setState({
+                socketState: this.props.socket.readyState
+            })
+        }
+
+        this.props.socket.onerror = () => {
+            this.setState({
+                socketState: this.props.socket.readyState
+            })
+        }
     }
 
     componentWillUnmount() {
@@ -63,7 +82,7 @@ class AppComponent extends React.Component {
     }
 
     render() {
-        if (this.state.finishedLoading && this.state.isVisible) {
+        if (this.state.finishedLoading && this.state.isVisible && this.state.socketState === 1) {
             return (
                 <div className="App">
                     <div className={this.state.theme === 'light' ? 'App-light' : 'App-dark'} >
@@ -72,10 +91,19 @@ class AppComponent extends React.Component {
                     </div>
                 </div >
             )
+        } else if (this.state.socketState === 0) {
+            return (
+                <div className="App">
+                    <div className={this.state.theme === 'light' ? 'Config-light' : 'Config-dark'}>
+                        <div>Loading...</div>
+                    </div>
+                </div>
+            )
         } else {
             return (
                 <div className="App">
                     <div className={this.state.theme === 'light' ? 'Config-light' : 'Config-dark'}>
+                        <div>Could Not Connect to the Server :(</div>
                     </div>
                 </div>
             )

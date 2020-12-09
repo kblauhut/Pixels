@@ -2,7 +2,7 @@ import { USER_DATA, CAN_PLACE } from '../actionTypes'
 
 const initialState = {
     userData: {},
-    canPlace: true
+    canPlace: false
 };
 
 const user = (state = initialState, action) => {

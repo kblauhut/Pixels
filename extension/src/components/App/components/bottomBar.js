@@ -14,7 +14,7 @@ export default class BottomBarComponent extends React.Component {
             showColorChooser: false,
             showPurchaseList: false,
             color: get_color_hex(props.color),
-            cooldown: 0,
+            cooldown: 60,
             purchasedPixels: 0
         }
     }
@@ -46,13 +46,16 @@ export default class BottomBarComponent extends React.Component {
                     this.countDownTimer.bind(this)()
                 }
             })
-        }
-
-        if (this.state.cooldown == 0 || this.state.purchasedPixels != 0) {
+        } else if (this.state.cooldown == 0 || this.state.purchasedPixels != 0) {
             this.props.dispatchCanPlace(true)
         }
-    }
 
+        if (this.state.purchasedPixels == 0 && this.state.cooldown == 0) {
+            this.setState({
+                purchasedPixels: 1
+            })
+        }
+    }
 
     confirmPurchase(sku) {
         function callback(transaction, props) {
