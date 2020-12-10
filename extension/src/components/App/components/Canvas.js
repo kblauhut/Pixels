@@ -42,6 +42,9 @@ export default class CanvasComponent extends React.Component {
         const y = Math.floor((e.clientY - rect.top) * this.canvas.current.height / rect.height)
         this.props.dispatchPixel(x, y, this.props.color)
         this.props.dispatchCanPlace(false)
+        this.setState({
+            lastPixelBuffer: { x: -1, y: -1, color: '#000000' }
+        })
     }
 
     onHover = (e) => {
