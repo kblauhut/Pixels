@@ -11,17 +11,17 @@ const bundlePath = path.resolve(__dirname, "dist/")
 module.exports = (_env, argv) => {
   let entryPoints = {
     Panel: {
-      path: "./src/Panel.js",
+      path: "./src/Panel.jsx",
       outputHtml: "panel.html",
       build: true
     },
     Config: {
-      path: "./src/Config.js",
+      path: "./src/Config.jsx",
       outputHtml: "config.html",
       build: true
     },
     LiveConfig: {
-      path: "./src/LiveConfig.js",
+      path: "./src/LiveConfig.jsx",
       outputHtml: "live_config.html",
       build: false
     },
