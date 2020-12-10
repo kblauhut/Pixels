@@ -36,28 +36,6 @@
         "width": 1280,
         "height": 720
       },
-      "id": "2",
-      "isPopout": false,
-      "label": "CurrentUser",
-      "linked": false,
-      "linkedUserId": "",
-      "orientation": "Portrait",
-      "type": "panel",
-      "viewerType": "Broadcaster"
-    },
-    {
-      "channelId": "93408776",
-      "configurationAnchor": "panel",
-      "displayChannelName": "kodeeey",
-      "features": {
-        "isBitsEnabled": true,
-        "isChatEnabled": false,
-        "isSubscriptionStatusAvailable": false
-      },
-      "frameSize": {
-        "width": 1280,
-        "height": 720
-      },
       "id": "3",
       "isPopout": false,
       "label": "test",

@@ -68,47 +68,58 @@ export default class BottomBarComponent extends React.Component {
 
     render() {
         return [
-            <div className={this.state.showColorChooser || this.state.showPurchaseList ?
-                'controlWrapper-active' : 'controlWrapper'}>
-                {this.state.showColorChooser ?
-                    <ColorChooser
-                        close={() => this.setState({ showColorChooser: !this.state.showColorChooser })}
-                        color={this.state.color}
-                        colorUpdate={(color) => {
-                            this.setState({ color: color })
-                            this.dispatchColorToState(color)
-                        }}
-                    /> : null
-                }
-                {this.state.showPurchaseList ?
-                    <PurchaseList
-                        close={() => this.setState({ showPurchaseList: !this.state.showPurchaseList })}
-                        purchase={(sku) => {
-                            this.confirmPurchase(sku)
-                        }}
-                    /> : null
-                }
-                < div className={'bottomBarWrapper'} >
-                    <div className={'bottomBar'}>
+            <div>
+                {true ? <UserInfo
+                    premiumPixels={this.state.purchasedPixels}
+                    cooldown={this.state.cooldown}
+                /> : null}
 
-                        <button
-                            className={'colorButton'}
-                            onClick={() => this.setState({ showColorChooser: !this.state.showColorChooser, showPurchaseList: false })}
-                        >Color
-                    <div className={'colorButtonCircle'} style={{ backgroundColor: this.state.color }} />
+                <div className={this.state.showColorChooser || this.state.showPurchaseList ?
+                    'controlWrapper-active' : 'controlWrapper'}>
+                    {this.state.showColorChooser ?
+                        <ColorChooser
+                            close={() => this.setState({ showColorChooser: !this.state.showColorChooser })}
+                            color={this.state.color}
+                            colorUpdate={(color) => {
+                                this.setState({ color: color })
+                                this.dispatchColorToState(color)
+                            }}
+                        /> : null
+                    }
+                    {this.state.showPurchaseList ?
+                        <PurchaseList
+                            close={() => this.setState({ showPurchaseList: !this.state.showPurchaseList })}
+                            purchase={(sku) => {
+                                this.confirmPurchase(sku)
+                            }}
+                        /> : null
+                    }
+
+
+                    < div className={'bottomBarWrapper'} >
+                        <div className={'bottomBar'}>
+
+
+                            <div
+                                className={'colorButton'}
+                                style={{
+                                    border: "3.5px solid " + this.state.color
+                                }}
+                                onClick={() => this.setState({ showColorChooser: !this.state.showColorChooser, showPurchaseList: false })}
+                            >
+                            </div>
+
+                            {true ? <button
+                                className={'purchaseButton'}
+                                onClick={() => this.setState({ showPurchaseList: !this.state.showPurchaseList, showColorChooser: false })}
+                            >
+                                Purchase Pixels
                         </button>
-                        {this.twitch.features.isBitsEnabled ? <button
-                            className={'purchaseButton'}
-                            onClick={() => this.setState({ showPurchaseList: !this.state.showPurchaseList, showColorChooser: false })}
-                        >Buy Pixels</button>
-                            : null
-                        }
-                        {this.props.userData.signedIn ? <UserInfo
-                            premiumPixels={this.state.purchasedPixels}
-                            cooldown={this.state.cooldown}
-                        /> : null}
-                    </div>
-                </div >
+                                : null
+                            }
+                        </div>
+                    </div >
+                </div>
             </div>
         ];
     }

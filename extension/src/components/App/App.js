@@ -38,8 +38,8 @@ class AppComponent extends React.Component {
     componentDidMount() {
         if (this.twitch) {
             this.twitch.onAuthorized((auth) => {
-                this.props.dispatch(auth.token)
                 if (!this.state.finishedLoading) {
+                    this.props.dispatch(auth.token)
                     this.setState(() => {
                         return { finishedLoading: true }
                     })
