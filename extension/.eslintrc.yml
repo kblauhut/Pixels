@@ -11,4 +11,6 @@ parserOptions:
   sourceType: module
 plugins:
   - react
-rules: {}
+rules: {
+  "react/button-has-type": 0
+}

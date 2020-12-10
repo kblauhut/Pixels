@@ -14,9 +14,10 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   const { color, user } = state;
   return { color: color.color, userData: user.userData };
 }
 
-export const BottomBarContainer = connect(mapStateToProps, mapDispatchToProps)(BottomBarComponent);
+const BottomBarContainer = connect(mapStateToProps, mapDispatchToProps)(BottomBarComponent);
+export { BottomBarContainer as default };

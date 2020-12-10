@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import shortid from 'shortid';
 import ColorChooser from './colorChooser';
 import PurchaseList from './purchaseList';
 import UserInfo from './userInfo';
-import { get_color_index, get_color_hex } from './color/colorPalette';
+import { getColorHex, getColorIndex } from './color/colorPalette';
 
 export default class BottomBarComponent extends React.Component {
   constructor(props) {
@@ -13,21 +14,25 @@ export default class BottomBarComponent extends React.Component {
     this.state = {
       showColorChooser: false,
       showPurchaseList: false,
-      color: get_color_hex(props.color),
+      color: getColorHex(props.color),
       cooldown: 60,
       purchasedPixels: 0,
     };
   }
 
   dispatchColorToState(color) {
-    this.props.dispatchColor(get_color_index(color));
+    const { dispatchColor } = this.props;
+
+    dispatchColor(getColorIndex(color));
   }
 
   countDownTimer() {
-    if (this.state.cooldown > 0) {
-      this.setState({ cooldown: this.state.cooldown - 1 });
+    const { cooldown, purchasedPixels } = this.state;
+
+    if (cooldown > 0) {
+      this.setState({ cooldown: cooldown - 1 });
       this.timeout = setTimeout(() => { this.countDownTimer(); }, 1000);
-      if (this.state.purchasedPixels == 0 && this.state.cooldown == 0) {
+      if (purchasedPixels === 0 && cooldown === 0) {
         this.setState({
           purchasedPixels: 1,
         });
@@ -36,21 +41,24 @@ export default class BottomBarComponent extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.userData !== prevProps.userData) {
+    const { userData, dispatchCanPlace } = this.props;
+    const { cooldown, purchasedPixels } = this.state;
+
+    if (userData !== prevProps.userData) {
       clearTimeout(this.timeout);
       this.setState({
-        cooldown: this.props.userData.purchasedPixels !== 0 ? 0 : Math.ceil(this.props.userData.cooldown / 1000) + 1,
-        purchasedPixels: this.props.userData.purchasedPixels,
+        cooldown: userData.purchasedPixels !== 0 ? 0 : Math.ceil(this.props.userData.cooldown / 1000) + 1,
+        purchasedPixels: userData.purchasedPixels,
       }, () => {
-        if (this.state.purchasedPixels == 0) {
+        if (purchasedPixels === 0) {
           this.countDownTimer.bind(this)();
         }
       });
-    } else if (this.state.cooldown == 0 || this.state.purchasedPixels != 0) {
-      this.props.dispatchCanPlace(true);
+    } else if (cooldown === 0 || purchasedPixels !== 0) {
+      dispatchCanPlace(true);
     }
 
-    if (this.state.purchasedPixels == 0 && this.state.cooldown == 0) {
+    if (purchasedPixels === 0 && cooldown === 0) {
       this.setState({
         purchasedPixels: 1,
       });
@@ -67,54 +75,69 @@ export default class BottomBarComponent extends React.Component {
   }
 
   render() {
+    const {
+      cooldown,
+      color,
+      purchasedPixels,
+      showColorChooser,
+      showPurchaseList,
+    } = this.state;
+
     return [
-      <div>
+      <div key={shortid.generate()}>
         {true ? (
           <UserInfo
-            premiumPixels={this.state.purchasedPixels}
-            cooldown={this.state.cooldown}
+            premiumPixels={purchasedPixels}
+            cooldown={cooldown}
+            key={shortid.generate()}
           />
         ) : null}
 
-        <div className={this.state.showColorChooser || this.state.showPurchaseList
-          ? 'controlWrapper-active' : 'controlWrapper'}
+        <div
+          className={showColorChooser || showPurchaseList
+            ? 'controlWrapper-active' : 'controlWrapper'}
+          key={shortid.generate()}
         >
-          {this.state.showColorChooser
+          {showColorChooser
             ? (
               <ColorChooser
-                close={() => this.setState({ showColorChooser: !this.state.showColorChooser })}
+                close={() => this.setState({ showColorChooser: !showColorChooser })}
                 color={this.state.color}
                 colorUpdate={(color) => {
                   this.setState({ color });
                   this.dispatchColorToState(color);
                 }}
+                key={shortid.generate()}
               />
             ) : null}
-          {this.state.showPurchaseList
+          {showPurchaseList
             ? (
               <PurchaseList
-                close={() => this.setState({ showPurchaseList: !this.state.showPurchaseList })}
+                close={() => this.setState({ showPurchaseList: !showPurchaseList })}
                 purchase={(sku) => {
                   this.confirmPurchase(sku);
                 }}
+                key={shortid.generate()}
               />
             ) : null}
 
-          <div className="bottomBarWrapper">
-            <div className="bottomBar">
+          <div className="bottomBarWrapper" key={shortid.generate()}>
+            <div className="bottomBar" key={shortid.generate()}>
 
               <div
                 className="colorButton"
                 style={{
-                  border: `3.5px solid ${this.state.color}`,
+                  border: `3.5px solid ${color}`,
                 }}
-                onClick={() => this.setState({ showColorChooser: !this.state.showColorChooser, showPurchaseList: false })}
+                onClick={() => this.setState({ showColorChooser: !showColorChooser, showPurchaseList: false })}
+                key={shortid.generate()}
               />
 
               {true ? (
                 <button
                   className="purchaseButton"
-                  onClick={() => this.setState({ showPurchaseList: !this.state.showPurchaseList, showColorChooser: false })}
+                  onClick={() => this.setState({ showPurchaseList: !showPurchaseList, showColorChooser: false })}
+                  key={shortid.generate()}
                 >
                   Purchase Pixels
                 </button>

@@ -32,13 +32,13 @@ export const palette = [
   '#4d4a40',
 ];
 
-export function get_color_hex(index) {
-  if (palette[index] != undefined) return palette[index];
+export function getColorHex(index) {
+  if (palette[index] !== undefined) return palette[index];
   return '#bdbdbd';
 }
 
-export function get_color_index(color) {
-  for (let i = 0; i < palette.length; i++) {
+export function getColorIndex(color) {
+  for (let i = 0; i < palette.length; i += 1) {
     if (palette[i] === color) return i;
   }
   return 0;

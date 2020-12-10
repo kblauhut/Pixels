@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import PanZoomContainer from './components/PanZoomContainer';
-import { BottomBarContainer } from './containers/bottomBar';
+import BottomBarContainer from './containers/bottomBar';
 import { authenticate } from '../../redux/actions';
 import './App.css';
 
@@ -17,12 +17,6 @@ class AppComponent extends React.Component {
       isVisible: true,
       socketState: 0,
     };
-  }
-
-  contextUpdate(context, delta) {
-    if (delta.includes('theme')) {
-      this.setState(() => ({ theme: context.theme }));
-    }
   }
 
   visibilityChanged(isVisible) {
@@ -40,7 +34,7 @@ class AppComponent extends React.Component {
         }
       });
 
-      this.twitch.onVisibilityChanged((isVisible, _c) => {
+      this.twitch.onVisibilityChanged((isVisible) => {
         this.visibilityChanged(isVisible);
       });
 
@@ -71,6 +65,12 @@ class AppComponent extends React.Component {
   componentWillUnmount() {
     if (this.twitch) {
       this.twitch.unlisten('broadcast', () => console.log('successfully unlistened'));
+    }
+  }
+
+  contextUpdate(context, delta) {
+    if (delta.includes('theme')) {
+      this.setState(() => ({ theme: context.theme }));
     }
   }
 

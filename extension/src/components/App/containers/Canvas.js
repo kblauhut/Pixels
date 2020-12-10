@@ -11,11 +11,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   const { pixels, color, user } = state;
   return {
     pixels: pixels.pixelArray, canvas: pixels.canvas, color: color.color, canPlace: user.canPlace,
   };
 }
 
-export const CanvasContainer = connect(mapStateToProps, mapDispatchToProps)(CanvasComponent);
+const CanvasContainer = connect(mapStateToProps, mapDispatchToProps)(CanvasComponent);
+export { CanvasContainer as default };

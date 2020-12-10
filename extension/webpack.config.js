@@ -19,12 +19,7 @@ module.exports = (_env, argv) => {
       path: "./src/Config.jsx",
       outputHtml: "config.html",
       build: true
-    },
-    LiveConfig: {
-      path: "./src/LiveConfig.jsx",
-      outputHtml: "live_config.html",
-      build: false
-    },
+    }
   }
 
   let entry = {}

@@ -1,12 +1,10 @@
 import React from 'react';
-
 import './Config.css';
 
 export default class ConfigPage extends React.Component {
   constructor(props) {
     super(props);
 
-    // if the extension is running on twitch or dev rig, set the shorthand here. otherwise, set to null.
     this.twitch = window.Twitch ? window.Twitch.ext : null;
     this.state = {
       finishedLoading: false,
@@ -14,20 +12,12 @@ export default class ConfigPage extends React.Component {
     };
   }
 
-  contextUpdate(context, delta) {
-    if (delta.includes('theme')) {
-      this.setState(() => ({ theme: context.theme }));
-    }
-  }
-
   componentDidMount() {
-    // do config page setup as needed here
-    if (this.twitch) {
-      this.twitch.onAuthorized((auth) => {
-        if (!this.state.finishedLoading) {
-          // if the component hasn't finished loading (as in we've not set up after getting a token), let's set it up now.
+    const { finishedLoading } = this.state;
 
-          // now we've done the setup for the component, let's set the state to true to force a rerender with the correct data.
+    if (this.twitch) {
+      this.twitch.onAuthorized(() => {
+        if (!finishedLoading) {
           this.setState(() => ({ finishedLoading: true }));
         }
       });
@@ -38,11 +28,23 @@ export default class ConfigPage extends React.Component {
     }
   }
 
+  contextUpdate(context, delta) {
+    const { theme } = this.state;
+
+    if (delta.includes('theme')) {
+      this.setState(() => ({ theme }));
+    }
+  }
+
   render() {
-    if (this.state.finishedLoading) {
+    const { theme, finishedLoading } = this.state;
+
+    if (finishedLoading) {
       return (
         <div className="Config">
-          <div className={this.state.theme === 'light' ? 'Config-light' : 'Config-dark'}>
+          <div
+            className={theme === 'light' ? 'Config-light' : 'Config-dark'}
+          >
             There is no configuration needed for this extension!
           </div>
         </div>
@@ -51,7 +53,9 @@ export default class ConfigPage extends React.Component {
 
     return (
       <div className="Config">
-        <div className={this.state.theme === 'light' ? 'Config-light' : 'Config-dark'}>
+        <div
+          className={theme === 'light' ? 'Config-light' : 'Config-dark'}
+        >
           Loading...
         </div>
       </div>

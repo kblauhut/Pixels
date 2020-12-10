@@ -8,13 +8,32 @@ const setupSocket = (dispatch) => {
     const data = JSON.parse(event.data);
     switch (data.type) {
       case types.SET_PIXEL:
-        dispatch(recievedPixel(data.message.x, data.message.y, data.message.color));
+        dispatch(
+          recievedPixel(
+            data.message.x,
+            data.message.y,
+            data.message.color,
+          ),
+        );
         break;
       case types.LOAD_CANVAS:
-        dispatch(loadCanvas(data.message.x, data.message.y, data.message.canvas));
+        dispatch(
+          loadCanvas(
+            data.message.x,
+            data.message.y,
+            data.message.canvas,
+          ),
+        );
         break;
       case types.USER_DATA:
-        dispatch(userData(data.message.signedIn, data.message.userId, data.message.cooldown, data.message.purchasedPixels));
+        dispatch(
+          userData(
+            data.message.signedIn,
+            data.message.userId,
+            data.message.cooldown,
+            data.message.purchasedPixels,
+          ),
+        );
         break;
       default:
         break;

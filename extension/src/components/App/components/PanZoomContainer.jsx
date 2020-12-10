@@ -1,6 +1,6 @@
 import React from 'react';
 import { PanZoom } from 'react-easy-panzoom';
-import { CanvasContainer } from '../containers/Canvas';
+import CanvasContainer from '../containers/Canvas';
 
 export default class PanZoomContainer extends React.PureComponent {
   constructor(props) {
@@ -22,15 +22,17 @@ export default class PanZoomContainer extends React.PureComponent {
   }
 
   onPanEnd() {
+    const { isPanning, zoomedToPlace } = this.state;
+
     this.setState({
       cursor: 'auto',
     });
 
-    if (this.state.isPanning) {
+    if (isPanning) {
       setTimeout(() => this.setState({
         isPanning: false,
       }), 100);
-    } else if (!this.state.zoomedToPlace) {
+    } else if (!zoomedToPlace) {
       this.panzoom.current.zoomIn(18);
     }
   }
@@ -58,7 +60,8 @@ export default class PanZoomContainer extends React.PureComponent {
   }
 
   render() {
-    return [
+    const { pixelated, isPanning, zoomedToPlace } = this.state;
+    return (
       <PanZoom
         ref={this.panzoom}
         minZoom={0.5}
@@ -74,10 +77,10 @@ export default class PanZoomContainer extends React.PureComponent {
         onPanEnd={this.onPanEnd.bind(this)}
       >
         <CanvasContainer
-          class={this.state.pixelated ? 'canvas pixelated' : 'canvas'}
-          blockPixelPlace={!!(this.state.isPanning || !this.state.zoomedToPlace)}
+          pixelated={pixelated}
+          blockPixelPlace={(isPanning || !zoomedToPlace)}
         />
-      </PanZoom>,
-    ];
+      </PanZoom>
+    );
   }
 }

@@ -1,24 +1,28 @@
 import React from 'react';
 import { FaRegClock, FaRegStar } from 'react-icons/fa';
+import shortid from 'shortid';
+import PropTypes from 'prop-types';
 
 export default class UserInfo extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
+    const { cooldown, premiumPixels } = this.props;
+
     return [
-      <div className="userInfo">
+      <div className="userInfo" key={shortid.generate()}>
         <div className="premiumPixels">
           <FaRegStar className="icon" />
-          {this.props.premiumPixels}
+          {premiumPixels}
         </div>
-        <div className="cooldown">
+        <div className="cooldown" key={shortid.generate()}>
           <FaRegClock className="icon" />
-          {`${this.props.cooldown}s`}
+          {`${cooldown}s`}
         </div>
-
       </div>,
     ];
   }
 }
+
+UserInfo.propTypes = {
+  cooldown: PropTypes.number.isRequired,
+  premiumPixels: PropTypes.number.isRequired,
+};

@@ -1,5 +1,12 @@
 import {
-  SET_PIXEL, RECIEVED_PIXEL, LOAD_CANVAS, UPDATE_COLOR, AUTHENTICATE, USER_DATA, PURCHASE, CAN_PLACE,
+  SET_PIXEL,
+  RECIEVED_PIXEL,
+  LOAD_CANVAS,
+  UPDATE_COLOR,
+  AUTHENTICATE,
+  USER_DATA,
+  PURCHASE,
+  CAN_PLACE,
 } from './actionTypes';
 
 export const setPixel = (x, y, color) => ({
@@ -60,9 +67,9 @@ export const purchase = (transaction) => ({
   },
 });
 
-export const canPlace = (canPlace) => ({
+export const canPlace = (placeable) => ({
   type: CAN_PLACE,
   payload: {
-    canPlace,
+    canPlace: placeable,
   },
 });
