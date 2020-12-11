@@ -20,12 +20,6 @@ export default class BottomBarComponent extends React.Component {
     };
   }
 
-  dispatchColorToState(color) {
-    const { dispatchColor } = this.props;
-
-    dispatchColor(getColorIndex(color));
-  }
-
   countDownTimer() {
     const { cooldown, purchasedPixels } = this.state;
 
@@ -63,6 +57,12 @@ export default class BottomBarComponent extends React.Component {
         purchasedPixels: 1,
       });
     }
+  }
+
+  dispatchColorToState(color) {
+    const { dispatchColor } = this.props;
+
+    dispatchColor(getColorIndex(color));
   }
 
   confirmPurchase(sku) {

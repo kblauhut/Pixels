@@ -15,7 +15,6 @@ class AppComponent extends React.Component {
       finishedLoading: false,
       theme: 'light',
       isVisible: true,
-      socketState: 0,
     };
   }
 
@@ -26,40 +25,30 @@ class AppComponent extends React.Component {
   }
 
   componentDidMount() {
+    const {
+      onAuthorized,
+      onVisibilityChanged,
+      onContext,
+    } = this.twitch;
+    const { finishedLoading } = this.state;
+    const { dispatch } = this.props;
+
     if (this.twitch) {
-      this.twitch.onAuthorized((auth) => {
-        if (!this.state.finishedLoading) {
-          this.props.dispatch(auth.token);
+      onAuthorized((auth) => {
+        if (!finishedLoading) {
+          dispatch(auth.token);
           this.setState(() => ({ finishedLoading: true }));
         }
       });
 
-      this.twitch.onVisibilityChanged((isVisible) => {
+      onVisibilityChanged((isVisible) => {
         this.visibilityChanged(isVisible);
       });
 
-      this.twitch.onContext((context, delta) => {
+      onContext((context, delta) => {
         this.contextUpdate(context, delta);
       });
     }
-
-    this.props.socket.onopen = () => {
-      this.setState({
-        socketState: this.props.socket.readyState,
-      });
-    };
-
-    this.props.socket.onclose = () => {
-      this.setState({
-        socketState: this.props.socket.readyState,
-      });
-    };
-
-    this.props.socket.onerror = () => {
-      this.setState({
-        socketState: this.props.socket.readyState,
-      });
-    };
   }
 
   componentWillUnmount() {
@@ -75,19 +64,22 @@ class AppComponent extends React.Component {
   }
 
   render() {
-    if (this.state.finishedLoading && this.state.isVisible && this.state.socketState === 1) {
+    const { finishedLoading, isVisible } = this.state;
+    const { readyState } = this.props;
+
+    if (finishedLoading && isVisible && readyState === 1) {
       return (
         <div className="App">
-          <div className={this.state.theme === 'light' ? 'App-light' : 'App-dark'}>
+          <div className={theme === 'light' ? 'App-light' : 'App-dark'}>
             <PanZoomContainer />
             <BottomBarContainer />
           </div>
         </div>
       );
-    } if (this.state.socketState === 0) {
+    } if (readyState === 0) {
       return (
         <div className="App">
-          <div className={this.state.theme === 'light' ? 'Config-light' : 'Config-dark'}>
+          <div className={theme === 'light' ? 'Config-light' : 'Config-dark'}>
             <div>Loading...</div>
           </div>
         </div>
@@ -95,7 +87,7 @@ class AppComponent extends React.Component {
     }
     return (
       <div className="App">
-        <div className={this.state.theme === 'light' ? 'Config-light' : 'Config-dark'}>
+        <div className={theme === 'light' ? 'Config-light' : 'Config-dark'}>
           <div>Could Not Connect to the Server :(</div>
         </div>
       </div>
@@ -105,6 +97,7 @@ class AppComponent extends React.Component {
 
 AppComponent.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  readyState: PropTypes.number.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

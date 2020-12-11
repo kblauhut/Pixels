@@ -16,13 +16,27 @@ const store = createStore(
   applyMiddleware(sagaMiddleware),
 );
 
+function render() {
+  ReactDOM.render(
+    <Provider store={store}>
+      <App readyState={socket.readyState} />
+    </Provider>,
+    document.getElementById('root'),
+  );
+}
+
 const socket = setupSocket(store.dispatch);
 
-sagaMiddleware.run(sendAction, { socket });
+socket.onopen = () => {
+  render();
+};
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App socket={socket} />
-  </Provider>,
-  document.getElementById('root'),
-);
+socket.onclose = () => {
+  render();
+};
+
+socket.onerror = () => {
+  render();
+};
+
+sagaMiddleware.run(sendAction, { socket });
