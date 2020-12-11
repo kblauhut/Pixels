@@ -103,6 +103,15 @@ export default class BottomBarComponent extends React.Component {
           />
         ) : null}
 
+        {!userData.signedIn ? (
+          <div
+            className={'shareIdentityBanner'}
+            key={shortid.generate()}
+          >
+            Please confirm your identity to start painting.
+          </div>
+        ) : null}
+
         <div
           className={showColorChooser || showPurchaseList
             ? 'controlWrapper-active' : 'controlWrapper'}
