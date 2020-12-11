@@ -64,8 +64,8 @@ class AppComponent extends React.Component {
   }
 
   render() {
-    const { finishedLoading, isVisible } = this.state;
-    const { readyState } = this.props;
+    const { finishedLoading, isVisible, theme } = this.state;
+    const { readyState, retry } = this.props;
 
     if (finishedLoading && isVisible && readyState === 1) {
       return (
@@ -88,7 +88,10 @@ class AppComponent extends React.Component {
     return (
       <div className="App">
         <div className={theme === 'light' ? 'Config-light' : 'Config-dark'}>
-          <div>Could Not Connect to the Server :(</div>
+          <div className="errorMessage">
+            Could not connect to the server :(
+            <button className="retryButton" onClick={retry}>Retry</button>
+          </div>
         </div>
       </div>
     );
@@ -96,6 +99,7 @@ class AppComponent extends React.Component {
 }
 
 AppComponent.propTypes = {
+  retry: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
   readyState: PropTypes.number.isRequired,
 };

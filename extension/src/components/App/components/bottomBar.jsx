@@ -34,9 +34,15 @@ export default class BottomBarComponent extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.twitch.actions.requestIdShare();
+  }
+
   componentDidUpdate(prevProps) {
     const { userData, dispatchCanPlace } = this.props;
     const { cooldown, purchasedPixels } = this.state;
+
+    if (!userData.signedIn) return;
 
     if (userData !== prevProps.userData) {
       clearTimeout(this.timeout);
@@ -83,9 +89,13 @@ export default class BottomBarComponent extends React.Component {
       showPurchaseList,
     } = this.state;
 
+    const {
+      userData,
+    } = this.props;
+
     return [
       <div key={shortid.generate()}>
-        {true ? (
+        {userData.signedIn ? (
           <UserInfo
             premiumPixels={purchasedPixels}
             cooldown={cooldown}
@@ -133,7 +143,7 @@ export default class BottomBarComponent extends React.Component {
                 key={shortid.generate()}
               />
 
-              {true ? (
+              {this.twitch.features.isBitsEnabled && userData.signedIn ? (
                 <button
                   className="purchaseButton"
                   onClick={() => this.setState({ showPurchaseList: !showPurchaseList, showColorChooser: false })}

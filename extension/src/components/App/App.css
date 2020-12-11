@@ -9,6 +9,7 @@
 
 .App-dark{
     color:#f3f3f3;
+    background: #1B1B1B;
 }
 
 .canvas {
@@ -159,9 +160,35 @@
     font-weight: 700;
     font-size:16px;
 }
+
 .listContainer {
     padding-top: 20px;
 }
+
+.errorMessage {
+    background: rgb(255, 89, 89);
+    color: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    position: absolute; 
+    top: 50px; 
+    padding: 20px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin: 20px;
+}
+
+.retryButton {
+    cursor:pointer;
+    outline: none;
+    border: none;
+    background: rgb(255, 186, 186);
+    color: white;
+    border-radius: 10px;
+    margin-top: 6px;
+    padding: 10px 20px;
+}
+
 ol {
     margin: auto;
     width: 90%;
