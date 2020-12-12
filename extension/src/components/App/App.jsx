@@ -30,12 +30,11 @@ class AppComponent extends React.Component {
       onVisibilityChanged,
       onContext,
     } = this.twitch;
-    const { finishedLoading } = this.state;
     const { dispatch } = this.props;
 
     if (this.twitch) {
       onAuthorized((auth) => {
-        if (!finishedLoading) {
+        if (!this.state.finishedLoading) {
           dispatch(auth.token);
           this.setState(() => ({ finishedLoading: true }));
         }
