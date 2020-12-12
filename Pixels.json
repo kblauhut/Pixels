@@ -74,46 +74,51 @@
     "authorName": "Kolja Blauhut",
     "bitsEnabled": true,
     "canInstall": true,
-    "configUrl": "https://localhost:8080/config.html",
+    "configUrl": "https://42xbn10yu3zukfc0f82ludfx6q4fd8.ext-twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.1/f1cc849faff7c30def796ad42a820b8a/config.html",
     "configurationLocation": "none",
-    "description": "Lets viewers color in pixels, which can be purchased with bits, within the extension panel.",
+    "description": "PIXELS:\nThis extension adds a clone of Reddit's Place with a canvas size of 450x300 (Thats 135,000 pixels!) to your twitch page. Viewers can purchase pixels on the canvas for one Bit each or wait 60 seconds for their pixel cooldown to end.\n\nVIEW THE SOURCE CODE:\nThis extension is completely open source. Please do not host your own versions of this for use on Twitch though unless permitted by me, thank you :)\nhttps://github.com/kblauhut/Pixels\nhttps://github.com/kblauhut/Pixels-EBS\n\nBETA VERSION NOTICE:\nThis extension is in beta and still needs proper testing, feel free to open an issue on GitHub or send me an Email if you encounter any bugs.\nI have no idea how much compute power the Backend will end up needing so lets just hope that my current server can handle the load...\n",
     "eulaTosUrl": "",
     "hasChatSupport": false,
-    "iconUrl": "",
-    "iconUrls": {},
+    "iconUrl": "https://extensions-discovery-images.twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.1/logo501a9086-33aa-47de-8085-1f6dcbf310a4",
+    "iconUrls": {
+      "100x100": "https://extensions-discovery-images.twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.1/logo501a9086-33aa-47de-8085-1f6dcbf310a4",
+      "24x24": "https://extensions-discovery-images.twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.1/taskbar70e36bcb-ee15-4830-a8d2-426d75eddaf9"
+    },
     "id": "42xbn10yu3zukfc0f82ludfx6q4fd8",
     "installationCount": -42,
-    "liveConfigUrl": "https://localhost:8080/config.html",
+    "liveConfigUrl": "https://42xbn10yu3zukfc0f82ludfx6q4fd8.ext-twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.1/f1cc849faff7c30def796ad42a820b8a/config.html",
     "name": "Pixels",
     "panelHeight": 500,
     "privacyPolicyUrl": "",
     "requestIdentityLink": true,
     "requiredBroadcasterAbilities": [],
-    "screenshotUrls": [],
+    "screenshotUrls": [
+      "https://extensions-discovery-images.twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.1/screenshotf8bf94c5-8708-435e-b4c1-e53ea75afc9e"
+    ],
     "sku": "",
-    "state": "Testing",
+    "state": "Assets Uploaded",
     "subscriptionsSupportLevel": "none",
-    "summary": "Lets viewers color in pixels, which can be purchased with bits, within the extension panel.",
+    "summary": "Pixels lets your viewers color individual pixels on a virtual canvas that's available globally on Twitch.",
     "supportEmail": "koljablauhut@gmail.com",
     "vendorCode": "",
     "version": "0.0.1",
-    "viewerSummary": "Lets viewers color in pixels, which can be purchased with bits, within the extension panel.",
-    "viewerUrl": "https://localhost:8080/panel.html",
+    "viewerSummary": "Purchase pixels with Bits or wait for your cooldown to end to paint on the canvas. Your purchases and paintings are available globally!",
+    "viewerUrl": "https://42xbn10yu3zukfc0f82ludfx6q4fd8.ext-twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.1/f1cc849faff7c30def796ad42a820b8a/panel.html",
     "viewerUrls": {
-      "panel": "https://localhost:8080/panel.html"
+      "panel": "https://42xbn10yu3zukfc0f82ludfx6q4fd8.ext-twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.1/f1cc849faff7c30def796ad42a820b8a/panel.html"
     },
     "views": {
       "panel": {
-        "viewerUrl": "https://localhost:8080/panel.html",
+        "viewerUrl": "https://42xbn10yu3zukfc0f82ludfx6q4fd8.ext-twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.1/f1cc849faff7c30def796ad42a820b8a/panel.html",
         "height": 500,
         "canLinkExternalContent": false
       },
       "config": {
-        "viewerUrl": "https://localhost:8080/config.html",
+        "viewerUrl": "https://42xbn10yu3zukfc0f82ludfx6q4fd8.ext-twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.1/f1cc849faff7c30def796ad42a820b8a/config.html",
         "canLinkExternalContent": false
       },
       "liveConfig": {
-        "viewerUrl": "https://localhost:8080/config.html",
+        "viewerUrl": "https://42xbn10yu3zukfc0f82ludfx6q4fd8.ext-twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.1/f1cc849faff7c30def796ad42a820b8a/config.html",
         "canLinkExternalContent": false
       }
     },
