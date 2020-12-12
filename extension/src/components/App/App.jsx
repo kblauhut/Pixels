@@ -30,12 +30,14 @@ class AppComponent extends React.Component {
       onVisibilityChanged,
       onContext,
     } = this.twitch;
-    const { dispatch } = this.props;
 
     if (this.twitch) {
       onAuthorized((auth) => {
+        const { dispatch, userData } = this.props;
+        if (!userData.signedIn) {
+          dispatch(auth.token)
+        }
         if (!this.state.finishedLoading) {
-          dispatch(auth.token);
           this.setState(() => ({ finishedLoading: true }));
         }
       });
@@ -101,6 +103,22 @@ AppComponent.propTypes = {
   retry: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
   readyState: PropTypes.number.isRequired,
+  userData: PropTypes.shape({
+    signedIn: PropTypes.bool,
+    userId: PropTypes.string,
+    cooldown: PropTypes.number,
+    purchasedPixels: PropTypes.number,
+  }),
+};
+
+
+AppComponent.defaultProps = {
+  userData: PropTypes.shape({
+    signedIn: false,
+    userId: 'def',
+    cooldown: 0,
+    purchasedPixels: 0,
+  }),
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -109,4 +127,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export const App = connect(null, mapDispatchToProps)(AppComponent);
+function mapStateToProps(state) {
+  const { user } = state;
+  return { userData: user.userData };
+}
+
+export const App = connect(mapStateToProps, mapDispatchToProps)(AppComponent);

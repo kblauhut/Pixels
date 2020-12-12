@@ -34,15 +34,17 @@ export default class BottomBarComponent extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this.twitch.actions.requestIdShare();
-  }
-
   componentDidUpdate(prevProps) {
     const { userData, dispatchCanPlace } = this.props;
     const { cooldown, purchasedPixels } = this.state;
 
-    if (!userData.signedIn) return;
+    if (!userData.signedIn) {
+      if (userData.userId !== 'def') {
+        this.twitch.actions.requestIdShare();
+      }
+
+      return;
+    }
 
     if (userData !== prevProps.userData) {
       clearTimeout(this.timeout);
