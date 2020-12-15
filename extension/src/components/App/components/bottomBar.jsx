@@ -160,7 +160,7 @@ export default class BottomBarComponent extends React.Component {
                   onClick={() => this.setState({ showPurchaseList: !showPurchaseList, showColorChooser: false })}
                   key={shortid.generate()}
                 >
-                  Purchase Pixels
+                  More Pixels
                 </button>
               )
                 : null}
