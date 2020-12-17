@@ -62,25 +62,27 @@ export default class PanZoomContainer extends React.PureComponent {
   render() {
     const { pixelated, isPanning, zoomedToPlace } = this.state;
     return (
-      <PanZoom
-        ref={this.panzoom}
-        minZoom={0.5}
-        maxZoom={40}
-        autoCenter
-        disableDoubleClickZoom
-        style={{
-          cursor: this.state.cursor,
-        }}
-        className="panZoom"
-        onStateChange={this.onStateChange.bind(this)}
-        onPanStart={this.onPanStart.bind(this)}
-        onPanEnd={this.onPanEnd.bind(this)}
-      >
-        <CanvasContainer
-          pixelated={pixelated}
-          blockPixelPlace={(isPanning || !zoomedToPlace)}
-        />
-      </PanZoom>
+      <div className={"panZoomWrapper"}>
+        <PanZoom
+          ref={this.panzoom}
+          minZoom={0.5}
+          maxZoom={40}
+          autoCenter
+          disableDoubleClickZoom
+          style={{
+            cursor: this.state.cursor,
+          }}
+          className="panZoom"
+          onStateChange={this.onStateChange.bind(this)}
+          onPanStart={this.onPanStart.bind(this)}
+          onPanEnd={this.onPanEnd.bind(this)}
+        >
+          <CanvasContainer
+            pixelated={pixelated}
+            blockPixelPlace={(isPanning || !zoomedToPlace)}
+          />
+        </PanZoom>
+      </div>
     );
   }
 }

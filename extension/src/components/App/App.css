@@ -27,6 +27,10 @@
     outline: 0px;
 }
 
+.panZoomWrapper {
+    height: 100em;
+}
+
 .bottomBarWrapper, .controlWrapper, .controlWrapper-active {
     position: absolute; 
     bottom: 0;
@@ -35,7 +39,7 @@
 }
 
 .controlWrapper-active {
-    height: 500px;
+    height: 100%;
 }
 
 .bottomBar{
@@ -153,8 +157,7 @@
 }
 
 .colors {
-    margin-top: 50px;
-    margin-left: 20px;
+    margin-left: 5%;
 }
 
 .listElement {

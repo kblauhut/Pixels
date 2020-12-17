@@ -22,8 +22,7 @@ export default class BottomBarComponent extends React.Component {
 
   countDownTimer() {
     const { cooldown, purchasedPixels } = this.state;
-
-    if (cooldown > 0) {
+    if (this.state.cooldown > 0) {
       this.setState({ cooldown: cooldown - 1 });
       this.timeout = setTimeout(() => { this.countDownTimer(); }, 1000);
       if (purchasedPixels === 0 && cooldown === 0) {
@@ -52,7 +51,7 @@ export default class BottomBarComponent extends React.Component {
         cooldown: userData.purchasedPixels !== 0 ? 0 : Math.ceil(this.props.userData.cooldown / 1000) + 1,
         purchasedPixels: userData.purchasedPixels,
       }, () => {
-        if (purchasedPixels === 0) {
+        if (userData.purchasedPixels === 0) {
           this.countDownTimer.bind(this)();
         }
       });

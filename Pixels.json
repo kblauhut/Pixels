@@ -66,6 +66,29 @@
       "orientation": "Portrait",
       "type": "panel",
       "viewerType": "Logged-In Viewer"
+    },
+    {
+      "channelId": "93408776",
+      "configurationAnchor": "panel",
+      "displayChannelName": "kodeeey",
+      "features": {
+        "isBitsEnabled": true,
+        "isChatEnabled": false,
+        "isSubscriptionStatusAvailable": false
+      },
+      "frameSize": {
+        "width": 1280,
+        "height": 720
+      },
+      "id": "5",
+      "isPopout": false,
+      "label": "",
+      "linked": true,
+      "linkedUserId": "155482013",
+      "opaqueId": "",
+      "orientation": "Portrait",
+      "type": "panel",
+      "viewerType": "Logged-In Viewer"
     }
   ],
   "manifest": {
@@ -74,9 +97,9 @@
     "authorName": "Kolja Blauhut",
     "bitsEnabled": true,
     "canInstall": true,
-    "configUrl": "https://42xbn10yu3zukfc0f82ludfx6q4fd8.ext-twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.1/181c1d7645cce74418e598dec65affd7/config.html",
+    "configUrl": "https://42xbn10yu3zukfc0f82ludfx6q4fd8.ext-twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.2/4a966b0aa413b18ab7c051af0ecfae42/config.html",
     "configurationLocation": "none",
-    "description": "PIXELS:\nThis extension adds a clone of Reddit's Place with a canvas size of 450x300 (Thats 135,000 pixels!) to your twitch page. Viewers can purchase pixels on the canvas for one Bit each or wait 60 seconds for their pixel cooldown to end.\n\nVIEW THE SOURCE CODE:\nThis extension is completely open source. Please do not host your own versions of this for use on Twitch though unless permitted by me, thank you :)\nhttps://github.com/kblauhut/Pixels\nhttps://github.com/kblauhut/Pixels-EBS\n\nBETA VERSION NOTICE:\nThis extension is in beta and still needs proper testing, feel free to open an issue on GitHub or send me an Email if you encounter any bugs.\nI have no idea how much compute power the Backend will end up needing so lets just hope that my current server can handle the load...\n",
+    "description": "PIXELS:\nThis extension adds a clone of Reddit's Place with a canvas size of 450x300 (Thats 135,000 pixels!) to your twitch page. Viewers can exchange pixels on the canvas for one Bit each or wait for their pixel cooldown to end.\n\nVIEW THE SOURCE CODE:\nThis extension is completely open source. Please do not host your own versions of this for use on Twitch though unless permitted by me, thank you :)\nhttps://github.com/kblauhut/Pixels\nhttps://github.com/kblauhut/Pixels-EBS\n\nBETA VERSION NOTICE:\nThis extension is in beta and still needs proper testing, feel free to open an issue on GitHub or send me an Email if you encounter any bugs.\nI have no idea how much compute power the backend will end up needing so lets just hope that my current server can handle the load...\n",
     "eulaTosUrl": "",
     "hasChatSupport": false,
     "iconUrl": "https://extensions-discovery-images.twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.1/logo501a9086-33aa-47de-8085-1f6dcbf310a4",
@@ -87,39 +110,39 @@
     },
     "id": "42xbn10yu3zukfc0f82ludfx6q4fd8",
     "installationCount": -42,
-    "liveConfigUrl": "https://42xbn10yu3zukfc0f82ludfx6q4fd8.ext-twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.1/181c1d7645cce74418e598dec65affd7/config.html",
+    "liveConfigUrl": "https://42xbn10yu3zukfc0f82ludfx6q4fd8.ext-twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.2/4a966b0aa413b18ab7c051af0ecfae42/config.html",
     "name": "Pixels",
     "panelHeight": 500,
     "privacyPolicyUrl": "",
     "requestIdentityLink": true,
     "requiredBroadcasterAbilities": [],
     "screenshotUrls": [
-      "https://extensions-discovery-images.twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.1/screenshotf8bf94c5-8708-435e-b4c1-e53ea75afc9e"
+      "https://extensions-discovery-images.twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.2/screenshot9a911156-e27e-41c5-aa68-9dd5ce22b92f"
     ],
     "sku": "",
-    "state": "Assets Uploaded",
+    "state": "In Review",
     "subscriptionsSupportLevel": "none",
     "summary": "Pixels lets your viewers color individual pixels on a virtual canvas that's available globally on Twitch.",
     "supportEmail": "koljablauhut@gmail.com",
     "vendorCode": "",
-    "version": "0.0.1",
-    "viewerSummary": "Purchase pixels with Bits or wait for your cooldown to end to paint on the canvas. Your purchases and paintings are available globally!",
-    "viewerUrl": "https://42xbn10yu3zukfc0f82ludfx6q4fd8.ext-twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.1/181c1d7645cce74418e598dec65affd7/panel.html",
+    "version": "0.0.2",
+    "viewerSummary": "Use bits or wait for your cooldown to end to paint on the canvas. Your pixels and paintings are available globally!",
+    "viewerUrl": "https://42xbn10yu3zukfc0f82ludfx6q4fd8.ext-twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.2/4a966b0aa413b18ab7c051af0ecfae42/panel.html",
     "viewerUrls": {
-      "panel": "https://42xbn10yu3zukfc0f82ludfx6q4fd8.ext-twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.1/181c1d7645cce74418e598dec65affd7/panel.html"
+      "panel": "https://42xbn10yu3zukfc0f82ludfx6q4fd8.ext-twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.2/4a966b0aa413b18ab7c051af0ecfae42/panel.html"
     },
     "views": {
       "panel": {
-        "viewerUrl": "https://42xbn10yu3zukfc0f82ludfx6q4fd8.ext-twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.1/181c1d7645cce74418e598dec65affd7/panel.html",
+        "viewerUrl": "https://42xbn10yu3zukfc0f82ludfx6q4fd8.ext-twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.2/4a966b0aa413b18ab7c051af0ecfae42/panel.html",
         "height": 500,
         "canLinkExternalContent": false
       },
       "config": {
-        "viewerUrl": "https://42xbn10yu3zukfc0f82ludfx6q4fd8.ext-twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.1/181c1d7645cce74418e598dec65affd7/config.html",
+        "viewerUrl": "https://42xbn10yu3zukfc0f82ludfx6q4fd8.ext-twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.2/4a966b0aa413b18ab7c051af0ecfae42/config.html",
         "canLinkExternalContent": false
       },
       "liveConfig": {
-        "viewerUrl": "https://42xbn10yu3zukfc0f82ludfx6q4fd8.ext-twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.1/181c1d7645cce74418e598dec65affd7/config.html",
+        "viewerUrl": "https://42xbn10yu3zukfc0f82ludfx6q4fd8.ext-twitch.tv/42xbn10yu3zukfc0f82ludfx6q4fd8/0.0.2/4a966b0aa413b18ab7c051af0ecfae42/config.html",
         "canLinkExternalContent": false
       }
     },
