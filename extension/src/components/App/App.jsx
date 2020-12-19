@@ -15,6 +15,7 @@ class AppComponent extends React.Component {
       finishedLoading: false,
       theme: 'light',
       isVisible: true,
+      authToken: ''
     };
   }
 
@@ -35,7 +36,10 @@ class AppComponent extends React.Component {
       onAuthorized((auth) => {
         const { dispatch, userData } = this.props;
         if (!userData.signedIn) {
-          dispatch(auth.token)
+          dispatch(auth.token);
+          this.setState({
+            authToken: auth.token
+          });
         }
         if (!this.state.finishedLoading) {
           this.setState(() => ({ finishedLoading: true }));
@@ -64,15 +68,24 @@ class AppComponent extends React.Component {
     }
   }
 
+  reconnect() {
+    this.props.retry();
+    setTimeout(() => {
+      if (this.props.readyState === 1) {
+        this.props.dispatch(this.state.authToken);
+      }
+    }, 500)
+  }
+
   render() {
     const { finishedLoading, isVisible, theme } = this.state;
-    const { readyState, retry } = this.props;
+    const { readyState } = this.props;
 
     if (finishedLoading && isVisible && readyState === 1) {
       return (
         <div className="App">
           <div className={theme === 'light' ? 'App-light' : 'App-dark'}>
-            <PanZoomContainer />
+            <PanZoomContainer signedIn={this.props.userData.signedIn} />
             <BottomBarContainer />
           </div>
         </div>
@@ -91,7 +104,7 @@ class AppComponent extends React.Component {
         <div className={theme === 'light' ? 'Config-light' : 'Config-dark'}>
           <div className="errorMessage">
             Could not connect to the server :(
-            <button className="retryButton" onClick={retry}>Retry</button>
+            <button className="retryButton" onClick={this.reconnect.bind(this)}>Retry</button>
           </div>
         </div>
       </div>

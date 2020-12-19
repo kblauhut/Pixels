@@ -1,6 +1,8 @@
 import React from 'react';
 import { PanZoom } from 'react-easy-panzoom';
 import CanvasContainer from '../containers/Canvas';
+import { FaCheck } from 'react-icons/fa';
+import PropTypes from 'prop-types';
 
 export default class PanZoomContainer extends React.PureComponent {
   constructor(props) {
@@ -10,6 +12,7 @@ export default class PanZoomContainer extends React.PureComponent {
       pixelated: false,
       isPanning: false,
       zoomedToPlace: false,
+      showInfo: true
     };
     this.panzoom = React.createRef();
   }
@@ -33,7 +36,7 @@ export default class PanZoomContainer extends React.PureComponent {
         isPanning: false,
       }), 100);
     } else if (!zoomedToPlace) {
-      this.panzoom.current.zoomIn(18);
+      this.panzoom.current.zoomIn(40);
     }
   }
 
@@ -48,11 +51,15 @@ export default class PanZoomContainer extends React.PureComponent {
       });
     }
 
+    let timer;
     if (state.scale >= 6) {
-      this.setState({
-        zoomedToPlace: true,
-      });
+      timer = setTimeout(() => {
+        this.setState({
+          zoomedToPlace: true,
+        })
+      }, 100)
     } else {
+      clearTimeout(timer)
       this.setState({
         zoomedToPlace: false,
       });
@@ -60,7 +67,7 @@ export default class PanZoomContainer extends React.PureComponent {
   }
 
   render() {
-    const { pixelated, isPanning, zoomedToPlace } = this.state;
+    const { pixelated, isPanning, zoomedToPlace, showInfo } = this.state;
     return (
       <div className={"panZoomWrapper"}>
         <PanZoom
@@ -82,7 +89,24 @@ export default class PanZoomContainer extends React.PureComponent {
             blockPixelPlace={(isPanning || !zoomedToPlace)}
           />
         </PanZoom>
+        {showInfo && this.props.signedIn ?
+          <div className={'shareIdentityBanner'}>
+            <div
+              className={'closeBanner'}
+              onClick={() => this.setState({ showInfo: false })}
+            >
+              close</div>
+            Zoom in using your mousewheel, then left click to place pixels
+          {zoomedToPlace ?
+              <FaCheck className="icon check" /> : null
+            }
+          </div> : null
+        }
       </div>
     );
   }
 }
+
+PanZoomContainer.propTypes = {
+  signedIn: PropTypes.bool.isRequired,
+};
