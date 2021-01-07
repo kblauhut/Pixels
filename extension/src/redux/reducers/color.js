@@ -1,7 +1,7 @@
 import { UPDATE_COLOR } from '../actionTypes';
 
 const initialState = {
-  color: 22,
+  color: 3,
 };
 
 const color = (state = initialState, action) => {

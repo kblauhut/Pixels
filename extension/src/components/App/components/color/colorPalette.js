@@ -30,6 +30,8 @@ export const palette = [
   '#ccb4a3',
   '#807669',
   '#4d4a40',
+  '#7ca4bd',
+  '#c8deec'
 ];
 
 export function getColorHex(index) {
